@@ -75,3 +75,11 @@ explore: user_data {
 explore: users {}
 
 explore: users_nn {}
+
+explore: firstexplore {
+  from: firstorders
+}
+
+explore: secondexplore {
+  from: secondorders
+}

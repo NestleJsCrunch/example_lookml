@@ -1,0 +1,44 @@
+view: firstorders {
+
+  sql_table_name: demo_db.orders ;;
+
+  dimension: id {
+    primary_key: yes
+    label: "this should be the first explore"
+    html: <font color="#ffb92e ">{{ rendered_value }}</font> ;;
+    type: number
+    sql: ${TABLE}.id ;;
+  }
+
+  dimension_group: created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: status {
+    type: string
+    sql: ${TABLE}.status ;;
+  }
+
+  dimension: user_id {
+    type: number
+    label: "this should be the first explore"
+    html: <font color="#ffb92e ">{{ rendered_value }}</font> ;;
+    # hidden: yes
+    sql: ${TABLE}.user_id ;;
+  }
+
+  measure: count {
+    type: count
+    drill_fields: [id, users.first_name, users.last_name, users.id, order_items.count]
+  }
+}
