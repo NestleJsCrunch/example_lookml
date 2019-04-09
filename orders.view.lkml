@@ -36,4 +36,33 @@ view: orders {
     type: count
     drill_fields: [id, users.first_name, users.last_name, users.id, order_items.count]
   }
+
+  filter: FilteringYTD {
+    type: string
+  }
+
+#   dimension: is_before_ytd {
+#     type: yesno
+#     sql: DAYOFYEAR(${date_date}) < DAYOFYEAR(CURRENT_DATE);;
+#   }
+
+  dimension: date_is_ytd {
+    type: yesno
+    sql:
+    current_date() ;;
+
+  }
+
+  measure: count_filter {
+    type: date
+    sql:
+    case
+    when ${date_is_ytd} = yes
+    then max(${created_date})
+    else null
+    end
+  ;;
+
+    }
+
 }

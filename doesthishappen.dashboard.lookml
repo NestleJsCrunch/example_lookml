@@ -6,14 +6,16 @@
   filters:
 
   elements:
-    - name: hello_world
-      type: looker_column
     - name: add_a_unique_name_1551748891
       title: Untitled Visualization
       model: derpinthesme
-      explore: firstexplore
+      explore: secondexplore
       type: table
-      fields: [firstexplore.id, firstexplore.user_id]
+      series_colors: red
+      series_name: firstexplorecolor
+      fields: [secondexplore.id, secondexplore.user_id]
+      limit: 500
+      query_timezone: America/New_York
       limit: 500
       query_timezone: America/New_York
       series_types: {}
