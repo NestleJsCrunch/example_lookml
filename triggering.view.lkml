@@ -14,7 +14,7 @@ dimension: id {
 }
 
 datagroup: newtrigger {
-  sql_trigger: count(*) from triggering.SQL_TABLE_NAME ;;
+  sql_trigger: select count(*) from triggering.SQL_TABLE_NAME ;;
 }
 
 explore: testing_these_things{
@@ -37,7 +37,7 @@ view: triggering2 {
 }
 
 datagroup: newtrigger2 {
-  sql_trigger: count(*) from triggering.SQL_TABLE_NAME ;;
+  sql_trigger: select count(*) from triggering.SQL_TABLE_NAME ;;
 }
 
 explore: testing_these_things2{
