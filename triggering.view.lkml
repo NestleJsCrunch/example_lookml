@@ -2,7 +2,7 @@ view: triggering {
 
 derived_table: {
   sql:
-  select * from demo_db.order_items limit 100 ;;
+  select * from demo_db.order_items limit 200 ;;
   persist_for: "1000 hours"
   indexes: ["id"]
 }
