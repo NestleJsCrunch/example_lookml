@@ -4,6 +4,7 @@ derived_table: {
   sql:
   select * from demo_db.order_items ;;
   persist_for: "1000 hours"
+  indexes: ["id"]
 }
 
 dimension: id {
@@ -14,4 +15,8 @@ dimension: id {
 
 datagroup: newtrigger {
   sql_trigger: count(*) from triggering.SQL_TABLE_NAME ;;
+}
+
+explore: testing_these_things{
+  from: triggering
 }
