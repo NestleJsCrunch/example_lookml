@@ -1,3 +1,7 @@
+#####################
+### first variant ###
+#####################
+
 view: triggering {
 
 derived_table: {
@@ -20,6 +24,11 @@ datagroup: newtrigger {
 explore: testing_these_things{
   from: triggering
 }
+
+
+#####################
+### other variant ###
+#####################
 
 view: triggering2 {
 

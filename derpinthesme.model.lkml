@@ -9,6 +9,14 @@ datagroup: derpinthesme_default_datagroup {
   max_cache_age: "1 hour"
 }
 
+
+datagroup: multiple_triggers {
+  sql_trigger: select count(order.id), count(order_items.id), count(inventory_items.id)
+  from demo_db.orders order
+  join demo_db.order_items order_items on order.id = order_items.id
+  join demo_db.inventory_items inventory_items on order.id = inventory_items.id ;;
+}
+
 persist_with: derpinthesme_default_datagroup
 
 explore: events {
