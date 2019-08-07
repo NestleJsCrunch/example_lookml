@@ -33,6 +33,13 @@ view: secondorders {
     type: number
 #     label: "this should be the second explore"
     html: <font color="#42a338 ">{{ rendered_value }}</font> ;;
+    link: {
+      label: "liquid linking out"
+      url: "/dashboards/402?
+      date%20liquid={{ _filters['secondexplore.created_date'] }}
+      &status%20liquid={{ value }}
+      &id%20liquid={{ secondexplore.id | url_encode }}"
+    }
     # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
