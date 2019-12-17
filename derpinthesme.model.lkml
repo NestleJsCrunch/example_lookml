@@ -72,6 +72,7 @@ explore: orders {
     relationship: many_to_one
   }
   always_join: [users]
+  conditionally_filter: { filters:{ field: orders.status value:"^_complete"} unless:[orders.user_id]}
 }
 
 explore: products {}
