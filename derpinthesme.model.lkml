@@ -22,6 +22,8 @@ persist_with: derpinthesme_default_datagroup
 
 
 ### Documentation https://dcl.dev.looker.com/projects/derpinthesme/files/test.md
+
+### BASE EXPLORES
 explore: events {
   join: users {
     type: left_outer
@@ -65,19 +67,7 @@ explore: order_items {
   }
 }
 
-explore: orders {
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-  always_join: [users]
-  conditionally_filter: { filters:{ field: orders.status value:"^_complete"} unless:[orders.user_id]}
-}
-
 explore: products {}
-
-# explore: schema_migrations {}
 
 explore: user_data {
   join: users {
@@ -93,32 +83,16 @@ explore: users_nn {
   join: users {}
 }
 
-explore: firstexplore {
-  from: firstorders
+# primary test explore
+explore: orders {
+  join: users {
+    type: left_outer
+    sql_on: ${orders.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
+  always_join: [users]
 }
-#
-explore: secondexplore {
-  from: secondorders
-}
 
+### CUSTOM EXPLORES
 
-# explore: liquid_waterfalls {}
-
-# explore: testingfield1 {
-#   from: orders
-#   fields: [stuff*]
-# }
-# explore: testingfield2 {
-#   from: orders
-#   fields: [stuff2*]
-#   }
-
-# explore: multiple_where {
-#   from:  orders
-#   sql_always_where: ${created_date} > date("2012","05","15") AND ${status} LIKE "complete" ;;
-# }
-
-# access_grant: testing_bad_things {
-#   user_attribute: Liquitidy
-#   allowed_values: ["funk"]
-# }
+explore: coolweird_stuff {}

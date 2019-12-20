@@ -1,14 +1,20 @@
-view: firstorders {
-
-  sql_table_name: demo_db.orders ;;
+view: orders {
+  sql_table_name: demo_db_generator.orders ;;
 
   dimension: id {
     primary_key: yes
-    label: "this should be the first explore"
-    html: <font color="#ffb92e ">{{ rendered_value }}</font> ;;
     type: number
     sql: ${TABLE}.id ;;
   }
+
+dimension: date_month {
+  type: date_month
+  sql: ${TABLE}.created_at ;;
+}
+dimension: offset_month {
+  type: date_month
+  sql:  DATE_ADD(${TABLE}.created_at, INTERVAL 1 month) ;;
+}
 
   dimension_group: created {
     type: time
@@ -19,26 +25,30 @@ view: firstorders {
       week,
       month,
       quarter,
-      year
+      year,
+      day_of_month,
+      month_num
     ]
     sql: ${TABLE}.created_at ;;
+    convert_tz: no
   }
 
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+
   }
 
   dimension: user_id {
     type: number
-    label: "this should be the first explore"
-    html: <font color="#ffb92e ">{{ rendered_value }}</font> ;;
     # hidden: yes
     sql: ${TABLE}.user_id ;;
   }
 
+
   measure: count {
     type: count
-    drill_fields: [id, users.first_name, users.last_name, users.id, order_items.count]
-  }
+    }
+
+
 }

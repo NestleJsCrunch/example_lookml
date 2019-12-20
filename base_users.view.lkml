@@ -1,5 +1,5 @@
 view: users {
-  sql_table_name: demo_db.users ;;
+  sql_table_name: demo_db_generator.users ;;
 
   dimension: id {
     primary_key: yes
@@ -9,8 +9,9 @@ view: users {
 
   dimension: age {
     type: number
-    sql: ${TABLE}.age ;;
+    sql: ${TABLE}.age;;
   }
+
 
   dimension: city {
     type: string
