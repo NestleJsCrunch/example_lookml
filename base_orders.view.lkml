@@ -51,4 +51,15 @@ dimension: offset_month {
     }
 
 
+  dimension: year_num {
+    type: number
+    sql: ${created_year} ;;
+  }
+
+  measure: max_year {
+    type: max
+    sql: ${year_num} ;;
+  }
+
+
 }

@@ -10,7 +10,7 @@ extends: [orders]
 #     label: "this should be the second explore"
     html: <font color="#42a338 ">{{ rendered_value }}</font> ;;
     link: {
-      label: "liquid linking out"
+      label: "L1: dynamic link to a dashboard"
       url: "/dashboards/402?
       date%20liquid={{ _filters['coolweird_stuff.created_date'] }}
       &status%20liquid={{ value }}
@@ -24,7 +24,7 @@ extends: [orders]
 
   parameter: liquidity {
     type: unquoted
-    label: "Can I use liquid in measure type param"
+    label: "L2: measure type selector"
     allowed_value: {
       value: "sum"
     }
@@ -37,13 +37,8 @@ extends: [orders]
 
   }
 
-  parameter: liquidity_injection {
-    type: unquoted
-    label: "nothing to see here"
-
-  }
-
   measure: liquidity_measure{
+    label: "L2: dynamic measure type"
     type: number
     sql: {% parameter liquidity %}${user_id};;
 
@@ -51,6 +46,7 @@ extends: [orders]
 
   # dynamic date format(s)
   parameter: date_type {
+    label: "L3: dynamic date formatting EU/USA"
     type: string
     allowed_value: { value: "EU" }
     allowed_value: { value: "USA" }
@@ -58,6 +54,7 @@ extends: [orders]
 
   dimension: formatted_date {
     type: string
+    label: "L3a: dynamic date formatted EU/USA"
     sql:
     case
     when {{ coolweird_stuff.date_type._parameter_value }} = "EU"
@@ -69,8 +66,9 @@ extends: [orders]
     end ;;
     group_label: "liquid"
     }
-
+  ## alternate way with html formatting
   dimension: formatted_checker {
+    label: "L3b: dynamic date formatted EU/USA 2"
     type: string
     sql:
     {{ coolweird_stuff.date_type._parameter_value }}
@@ -85,12 +83,13 @@ extends: [orders]
 
   # dynamic timeframe
   filter: timeframe_picker_create {
+    label: "L4: dynamic timeframe selector"
     type: string
     suggestions: ["day", "week", "month", "quarter","year"]
   }
 
   dimension: dynamic_timeframe_create {
-    label: " report created at"
+    label: "L4: dynamic timeframe selected"
     type: date
     sql:
     CASE
@@ -106,6 +105,7 @@ extends: [orders]
 
 
   parameter: week_or_month {
+    label: "L5: alternate dynamic timeframe selector"
     type: unquoted
     allowed_value: { label: "Week" value: "week"}
     allowed_value: { label: "Month" value: "month"}
@@ -115,7 +115,7 @@ extends: [orders]
 
   dimension: period_select {
     type: string
-    label_from_parameter: week_or_month
+    label: "L5: alternate dynamic timeframe selector"
     sql:
     {% if coolweird_stuff.week_or_month._parameter_value == 'week' %}
 "week selected"
@@ -136,6 +136,7 @@ extends: [orders]
 
   # wtf does this do
   measure:doesthisworkoutofthebox{
+    hidden: yes
     type: number
     sql: ${count} ;;
     html: {% assign seconds=value | modulo: 60 %}
@@ -145,6 +146,7 @@ extends: [orders]
 
   # how to escape liquid
   dimension: howto_escape_liquid {
+    hidden: yes
     type: string
     sql: case when 1=1
           then "\{\{test\}\}"
@@ -155,6 +157,7 @@ extends: [orders]
 
   # count with liquid url
   measure: count {
+    hidden: yes
     type: count
     drill_fields: [id, created_date,users.first_name, users.last_name, users.id, orders.count]
     link: {label:"my label" url: "/explore/derpinthesme/orders?fields=orders.created_date,orders.count&f[orders.created_date]={{ value }}&sorts=count+desc"
@@ -164,6 +167,8 @@ extends: [orders]
 
   # CIGNA linking dimension/drill
   dimension: interesting_id {
+    hidden: yes
+    label: "this doesn't work"
     type: number
     sql: ${TABLE}.id ;;
     html:
@@ -196,6 +201,7 @@ extends: [orders]
 
   # not sure what this does
   measure: thecount {
+    hidden: yes
     type: count
     drill_fields: [id, created_date,users.first_name, users.last_name, users.id, orders.count]
     link: {url: "{{ id._value }}" label: "link out in liquid"
@@ -206,6 +212,7 @@ extends: [orders]
 
   # yesno is current date
   dimension: now_time {
+    hidden: yes
     type: string
     sql: now() ;;
     group_label: "liquid"
@@ -213,6 +220,7 @@ extends: [orders]
   }
 
   dimension: is_current_date {
+    label: "is today = created_date"
     type: yesno
     sql: {{ now_time._value }} = ${created_date}  ;;
     group_label: "liquid"
@@ -224,6 +232,7 @@ extends: [orders]
 
   # Because Why ETL
   dimension: to_12_time {
+    label: "SQL1: timestamp formatted with am/pm"
     type: string
     sql:
       concat(
@@ -243,6 +252,7 @@ extends: [orders]
 
   # Month Day instead of monthdayyear
   dimension: monthday {
+    label: "SQL2: date formatted as mm/dd"
     type: string
     sql: concat(${created_month_num},"/",${created_day_of_month}) ;;
     group_label: "weird sql"
@@ -252,6 +262,7 @@ extends: [orders]
 
   dimension: what_quarter {
     type: string
+    label: "SQL3: quarters as Q1,Q2,Q3,Q4"
     sql:
       case when EXTRACT(MONTH FROM ${TABLE}.created)
      IN('01','02','03')
@@ -269,8 +280,7 @@ extends: [orders]
   }
 
   dimension: testing_wildcards {
-    view_label: "(1) Adwords Ad"
-    label: "Does Ad Copy Contain the Campaign Theme?"
+    label: "like wildcard test"
     description: "Returns yes if the first 3 letters of the campaign theme are in either the headline 1, headline 2 or description"
     type: yesno
     sql: CASE
@@ -282,6 +292,7 @@ extends: [orders]
   }
 
   measure: testing {
+    hidden: yes
     type: sum
     sql: case when 1=1
           then 1
@@ -298,24 +309,32 @@ extends: [orders]
   ### expression
 
   measure: ccount {
+    hidden: yes
+    #doesn't work
+    label: "expression count"
     type: number
     sql: count(*) ;;
     group_label: "expression"
   }
 
   measure: sum_counts {
+    #doesn't work
+    hidden: yes
+    label: "expression sum"
     type: sum
     # expression: sum(${ccount}) ;;
     group_label: "expression"
   }
 
   dimension: contains_jeff {
+    label: "replace string function"
     type: string
     expression: replace(${status},"comp", "Jeff") ;;
     group_label: "expression"
   }
 
   dimension: does_it_contain_jeff {
+    label: "contains string function"
     type: yesno
     expression: contains(${contains_jeff},"Jeff") ;;
     group_label: "expression"
@@ -324,6 +343,9 @@ extends: [orders]
 
   # to string and to number do not work
   dimension: stringify {
+    #doesnt work
+    hidden: yes
+    label: "string conversion function"
     type: string
     # expression: to_string(${coolweird_stuff.count}) ;;
     group_label: "expression"
@@ -332,6 +354,7 @@ extends: [orders]
 
 
   dimension: going_to_be_cool {
+    label: "referencing expression"
     type: number
     sql: case
           when ${status} = "cancelled"

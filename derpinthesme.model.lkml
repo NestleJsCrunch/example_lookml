@@ -96,3 +96,7 @@ explore: orders {
 ### CUSTOM EXPLORES
 
 explore: coolweird_stuff {}
+
+explore: testing_cache {
+  from: orders
+}
