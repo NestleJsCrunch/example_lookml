@@ -13,7 +13,17 @@ constant: project_name {
 #####
 
 ## Constants
-# Let's have fun with Constants!
+constant: sql_snip {
+  value: "${id}"
+}
+
+constant: reuse_sql1 {
+  value: "${created_date} < ${orders.created_date}"
+}
+
+constant: reuse_sql2 {
+  value: "${orders.status} is not null"
+}
 
 #####
 

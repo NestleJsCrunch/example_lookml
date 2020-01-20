@@ -1,3 +1,4 @@
+include: "base_users.view.lkml"
 view: orders {
   sql_table_name: demo_db_generator.orders ;;
 
@@ -60,6 +61,5 @@ dimension: offset_month {
     type: max
     sql: ${year_num} ;;
   }
-
 
 }

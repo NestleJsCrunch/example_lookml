@@ -2,7 +2,50 @@ include: "base_orders.view.lkml"
 view: coolweird_stuff {
 extends: [orders]
 
-### Cool Liquid Stuff:
+### Cool Liquid Stuff: ###
+
+# dynamic tiers #
+
+# A user's id. Just a number in our table
+  dimension: id {
+    type: number
+    sql: ${TABLE}.id ;;
+  }
+
+# This is our parameter which our user will populate
+  parameter:  id_buckets {
+    type: string
+  }
+
+# This dimension uses liquid (the {%} stuff) to do some parsing and builds a case statement
+  dimension: id_compare_groups {
+    sql:
+    {% assign my_array = id_buckets._parameter_value | remove: "'" | split: "," %}
+        {% assign sort = '-1' %}
+    {% assign last_group_max_label = ' 0' %}
+
+    case
+    {%for element in my_array%}
+    {% assign sort = sort | plus: 1 %}
+
+      when ${id}<{{element}} then  'bucket {{sort}}. {{last_group_max_label}} < N < {{element}}'
+    {%endfor%}
+    {% assign sort = sort | plus: 1 %}
+
+      when ${id}>={{last_group_max_label}} then 'bucket {{sort}}. >= {{last_group_max_label}}'
+    else 'unknown'
+    end
+          ;;
+  }
+
+  measure: count {
+    type: count
+  }
+
+#   dimension: dumby_label{
+#     type: string
+#     sql:  ;;
+#   }
 
 # links and fonts
   dimension: user_id {
@@ -38,6 +81,7 @@ extends: [orders]
   }
 
   measure: liquidity_measure{
+    group_label: "liquid"
     label: "L2: dynamic measure type"
     type: number
     sql: {% parameter liquidity %}${user_id};;

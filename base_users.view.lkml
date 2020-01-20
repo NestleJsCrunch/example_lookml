@@ -1,3 +1,5 @@
+include: "*.view.lkml"
+
 view: users {
   sql_table_name: demo_db_generator.users ;;
 
@@ -86,6 +88,11 @@ view: users {
     ]
   }
 
+  dimension: con_id {
+    type: string
+    sql: @{reuse_sql1} + 5 and @{reuse_sql2} ;;
+  }
+
 
   filter: pp_dates{
     type: date
@@ -95,6 +102,13 @@ view: users {
     type:  date
   }
 
+}
+
+explore: users_test {
+  from: users
+  join: orders {
+    sql_on: ${users_test.id} = ${orders.user_id} ;;
+  }
 }
 
 #   dimension: current_or_previous {
