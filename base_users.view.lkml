@@ -93,6 +93,16 @@ view: users {
     sql: @{reuse_sql1} + 5 and @{reuse_sql2} ;;
   }
 
+  dimension: con_id2 {
+    type: string
+    sql: @{reuse_sql1} + 2 and @{reuse_sql2} ;;
+  }
+
+  dimension: con_id6 {
+    type: string
+    sql: @{reuse_sql1} + 6 and @{reuse_sql2} ;;
+  }
+
 
   filter: pp_dates{
     type: date
