@@ -19,4 +19,26 @@ explore: orders {}
 #   }
 # }
 
-### adding comment will actually revert
+explore: orderz {
+  from:  orders
+}
+
+explore: orderzs {
+  from:  orders
+}
+
+explore: orders_s {
+  from:  orders
+}
+
+explore: order_s {
+  from:  orders
+}
+
+explore: orders_ss {
+  from:  orders
+}
+
+explore: order_sS {
+  from:  orders
+}
