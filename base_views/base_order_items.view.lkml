@@ -1,11 +1,5 @@
 view: order_items {
-  sql_table_name: {% if _model._name == 'derpinthesme' %}
-demo_db.order_items
-{% elsif _model._name == 'examplemodel' %}
-demo_db.orders
-{% else %}
-demo_db.inventory_items
-{% endif %} ;;
+  sql_table_name: demo_db.order_items ;;
 
   dimension: id {
     primary_key: yes

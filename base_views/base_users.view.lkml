@@ -63,7 +63,6 @@ view: users {
   dimension: state {
     type: string
     sql: ${TABLE}.state ;;
-    html: <a href="https://docs.google.com/document/d/1u9Aqozwtf4xEW1rBcjEJN4CtHVuTd9TAISeA6aGO0ik/edit?usp=sharing" target="_blank"></a><img src="http://drive.google.com/uc?export=view&id=1iG8jB0h5z1yGOHJuOZNSd6ugfNj7XCZU" alt="test" width="300" height="100" align="left"> ;;
   }
 
   dimension: zip {

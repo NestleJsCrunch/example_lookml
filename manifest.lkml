@@ -25,6 +25,33 @@ constant: reuse_sql2 {
   value: "${orders.status} is not null"
 }
 
+constant: list {
+  value: "1,2,3,4"
+}
+
+constant: building {
+  value: "@{list},6,7,8,9,10"
+}
+
+constant: dashboard_link {
+  value: "`/dashboards/580?ID={{ value | url_encode }}`"
+}
+
+constant: filter {
+  value: "complete"
+}
+
+constant: subquery {
+  value: "(SELECT MAX(${id}) FROM demo_db_generator.orders WHERE ${status} LIKE 'complete')"
+}
+
+constant: mysql_ddiff {
+  value: "DATEDIFF("
+}
+constant: bq_ddiff {
+  value: "DATE_DIFF("
+}
+
 #####
 
 ### String Formatting
