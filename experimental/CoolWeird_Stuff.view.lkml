@@ -1,4 +1,4 @@
-include: "base_orders.view.lkml"
+include: "/*/base_orders.view.lkml"
 view: coolweird_stuff {
 extends: [orders]
 
@@ -195,17 +195,6 @@ extends: [orders]
     sql: case when 1=1
           then "\{\{test\}\}"
           end;;
-    group_label: "liquid"
-  }
-
-
-  # count with liquid url
-  measure: count {
-    hidden: yes
-    type: count
-    drill_fields: [id, created_date,users.first_name, users.last_name, users.id, orders.count]
-    link: {label:"my label" url: "/explore/derpinthesme/orders?fields=orders.created_date,orders.count&f[orders.created_date]={{ value }}&sorts=count+desc"
-    }
     group_label: "liquid"
   }
 

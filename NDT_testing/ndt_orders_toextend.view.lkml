@@ -1,7 +1,4 @@
-include: "/*/*.view.lkml"
-
-
-view: orders {
+view: ndt_orderstoextend {
   sql_table_name: demo_db_generator.orders ;;
 
   dimension: id {
@@ -10,15 +7,15 @@ view: orders {
     sql: ${TABLE}.id ;;
   }
 
-dimension: date_month {
-  type: date_month
-  sql: ${TABLE}.created_at ;;
-}
+  dimension: date_month {
+    type: date_month
+    sql: ${TABLE}.created_at ;;
+  }
 
-dimension: offset_month {
-  type: date_month
-  sql:  DATE_ADD(${TABLE}.created_at, INTERVAL 1 month) ;;
-}
+  dimension: offset_month {
+    type: date_month
+    sql:  DATE_ADD(${TABLE}.created_at, INTERVAL 1 month) ;;
+  }
 
   dimension_group: created {
     type: time
@@ -53,7 +50,8 @@ dimension: offset_month {
 
   dimension: status {
     type: string
-    sql: CASE WHEN ${TABLE}.status is null "Other" ELSE ${TABLE}.status  ;;
+    sql: ${TABLE}.status ;;
+
   }
 
   dimension: user_id {
@@ -66,7 +64,7 @@ dimension: offset_month {
   measure: count {
     type: count
     drill_fields: [id,created_date,user_id]
-    }
+  }
 
 
   dimension: year_num {
@@ -79,14 +77,5 @@ dimension: offset_month {
     sql: ${year_num} ;;
   }
 
-
-  parameter: bad_param {
-    type: string
-    default_value: "Charles Schwab & Co., Inc.,"
-  }
-  dimension: bad_sql {
-    type: string
-    sql: 'Charles Schwab & Co., Inc.,' ;;
-  }
 
 }

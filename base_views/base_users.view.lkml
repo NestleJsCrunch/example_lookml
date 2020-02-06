@@ -1,5 +1,7 @@
-include: "*.view.lkml"
+include: "/*/*.view.lkml"
 
+
+###
 view: users {
   sql_table_name: demo_db_generator.users ;;
 
@@ -72,98 +74,7 @@ view: users {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
   }
 
-  # ----- Sets of fields for drilling ------
-  set: detail {
-    fields: [
-      id,
-      first_name,
-      last_name,
-      events.count,
-      orders.count,
-      user_data.count
-    ]
-  }
-
-  dimension: con_id {
-    type: string
-    sql: @{reuse_sql1} + 5 and @{reuse_sql2} ;;
-  }
-
-  dimension: con_id2 {
-    type: string
-    sql: @{reuse_sql1} + 2 and @{reuse_sql2} ;;
-  }
-
-  dimension: con_id6 {
-    type: string
-    sql: @{reuse_sql1} + 6 and @{reuse_sql2} ;;
-  }
-
-
-  filter: pp_dates{
-    type: date
-  }
-
-  filter: cp_dates {
-    type:  date
-  }
 
 }
-
-explore: users_test {
-  from: users
-  join: orders {
-    sql_on: ${users_test.id} = ${orders.user_id} ;;
-  }
-}
-
-#   dimension: current_or_previous {
-#     type: string
-#     sql: CASE
-#     WHEN {% date_start pp_dates %} <= ${created_date} AND {% date_end pp_dates %} >= ${created_date}
-#     THEN "Previous Period"
-#     WHEN {% date_start cp_dates %} <= ${created_date} AND {% date_end cp_dates %} >= ${created_date}
-#     THEN "Current Period"
-#     ELSE
-#     "Not in either period"
-#     END
-#     ;;
-#   }
-
-
-#   dimension: previous_period {
-#     type: string
-#     description: "The reporting period as selected by the Previous Period Filter"
-#     sql:
-#         CASE
-#           WHEN {% date_start previous_period_filter %} is not null AND {% date_end previous_period_filter %} is not null /* date ranges or in the past x days */
-#             THEN
-#               CASE
-#                 WHEN ${created_raw} >=  {% date_start previous_period_filter %}
-#                   AND ${created_raw} <= {% date_end previous_period_filter %}
-#                   THEN 'This Period'
-#                 WHEN ${created_raw} >= DATEADD(day,-1*DATEDIFF(day,{% date_start previous_period_filter %},
-#                 {% date_end previous_period_filter %} ) + 1, DATEADD(day,-1,{% date_start previous_period_filter %} ) )
-#                   AND ${created_raw} < DATEADD(day,-1,{% date_start previous_period_filter %} ) + 1
-#                   THEN 'Previous Period'
-#               END
-#           WHEN {% date_start previous_period_filter %} is null AND {% date_end previous_period_filter %} is null /* has any value or is not null */
-#             THEN CASE WHEN ${created_raw} is not null THEN 'Has Value' ELSE 'Is Null' END
-#           WHEN {% date_start previous_period_filter %} is null AND {% date_end previous_period_filter %} is not null /* on or before */
-#             THEN
-#               CASE
-#                 WHEN  ${created_raw} <=  {% date_end previous_period_filter %} THEN 'In Period'
-#                 WHEN  ${created_raw} >   {% date_end previous_period_filter %} THEN 'Not In Period'
-#               END
-#          WHEN {% date_start previous_period_filter %} is not null AND {% date_end previous_period_filter %} is null /* on or after */
-#            THEN
-#              CASE
-#                WHEN  ${created_raw} >= {% date_start previous_period_filter %} THEN 'In Period'
-#                WHEN  ${created_raw} < {% date_start previous_period_filter %} THEN 'Not In Period'
-#             END
-#         END ;;
-#   }
-# }

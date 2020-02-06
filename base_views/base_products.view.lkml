@@ -1,3 +1,6 @@
+include: "/*/*.view.lkml"
+
+
 view: products {
   sql_table_name: demo_db.products ;;
 

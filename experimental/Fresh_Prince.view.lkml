@@ -1,3 +1,5 @@
+include: "/*/*.view.lkml"
+
 view: fresh_prince {
 derived_table: {
   sql:
@@ -57,72 +59,4 @@ measure: liquid_nodim {
     sql: ${TABLE}.status ;;
   }
 
-}
-
-explore: fresh_prince {}
-
-### FR: Create a Parameter that can filter based on "Max" values in a table
-
-# base table
-view: fp0 {
-  derived_table: {
-    sql:
-    select *
-    from demo_db_generator.orders o
-    ;;
-  }
-}
-
-# grab max/min values from table
-view: fp1 {
-  derived_table: {
-    sql:
-  select Max(YEAR(created_at)) as MxYEAR,
-         Min(YEAR(created_at)) as MnYEAR,
-         Max(created_at) as MxDATE,
-         Min(created_at) as MnDATE
-  from demo_db_generator.orders o
-  ;;
-  }
-
-parameter: thing1 {}
-
-dimension: MxYEAR {}
-
-dimension: MnYEAR {}
-
-dimension: MxDATE {}
-
-dimension: MnDATE {}
-
-
-dimension: thing2 {
-  type: string
-  sql:
-  {% if thing1._parameter_value == "'MxYEAR'" %}
-  ${MxYEAR}
-  {% elsif thing1._parameter_value == "'MnYEAR'" %}
-  ${MnYEAR}
-  {% elsif thing1._parameter_value == "'MxDATE'" %}
-  ${MxDATE}
-  {% else %}
-  ${MnDATE}
-  {% endif %} ;;
-}
-
-dimension: filtered {
-  type: string
-  sql:
-  case when ${thing2} = ${fresh_prince.created_year}
-  then ${fresh_prince.created_year}
-  else null ;;
-}
-
-}
-
-explore: fp {
-  from: fresh_prince
-  join: fp1 {
-    sql_on: 1=1 ;;
-  }
 }

@@ -77,10 +77,23 @@ measure: mysql_ddiff {
 
 # use a constant to create consistant sets of formatting
 
+
+
+
+  dimension: con_id {
+    type: string
+    sql: @{reuse_sql1} + 5 and @{reuse_sql2} ;;
+  }
+
+  dimension: con_id2 {
+    type: string
+    sql: @{reuse_sql1} + 2 and @{reuse_sql2} ;;
+  }
+
+  dimension: con_id6 {
+    type: string
+    sql: @{reuse_sql1} + 6 and @{reuse_sql2} ;;
+  }
 }
 
 # search in a list with constants in your derived table
-
-
-
-explore: fw_constants {}
