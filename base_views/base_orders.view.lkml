@@ -53,7 +53,7 @@ dimension: offset_month {
 
   dimension: status {
     type: string
-    sql: CASE WHEN ${TABLE}.status is null "Other" ELSE ${TABLE}.status  ;;
+    sql: ${TABLE}.status ;;
   }
 
   dimension: user_id {
@@ -88,5 +88,32 @@ dimension: offset_month {
     type: string
     sql: 'Charles Schwab & Co., Inc.,' ;;
   }
+
+  ### Praveen Test
+
+  dimension: bad_status {
+    type: string
+    sql: ${status} ;;
+    required_fields: [bucket_id]
+
+  }
+
+  dimension: bucket_id {
+    type: string
+    sql: ${TABLE}.id ;;
+  }
+
+  dimension: is_control_bad {
+    type: yesno
+    sql: ${user_id} > 400   ;;
+    required_fields: [bucket_id]
+  }
+
+  dimension: is_control_good {
+    type: yesno
+    sql: ${user_id} > 400   ;;
+#     required_fields: [bucket_id]
+  }
+
 
 }
