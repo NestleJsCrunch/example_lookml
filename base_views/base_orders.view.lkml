@@ -8,6 +8,7 @@ view: orders {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+
   }
 
 dimension: date_month {
@@ -79,6 +80,17 @@ dimension: offset_month {
     sql: ${year_num} ;;
   }
 
+  dimension: dimension_fill {
+    type: string
+    case:
+    {
+    when: { sql: ${status}='complete';; label:"complete"}
+    when: { sql: ${status}='pending';; label:"pending"}
+    when: { sql: ${status}='cancelled';; label:"cancelled"}
+    when: { sql: ${status}='other';; label:"other"}
+
+  }
+}
 
   parameter: bad_param {
     type: string
@@ -88,32 +100,5 @@ dimension: offset_month {
     type: string
     sql: 'Charles Schwab & Co., Inc.,' ;;
   }
-
-  ### Praveen Test
-
-  dimension: bad_status {
-    type: string
-    sql: ${status} ;;
-    required_fields: [bucket_id]
-
-  }
-
-  dimension: bucket_id {
-    type: string
-    sql: ${TABLE}.id ;;
-  }
-
-  dimension: is_control_bad {
-    type: yesno
-    sql: ${user_id} > 400   ;;
-    required_fields: [bucket_id]
-  }
-
-  dimension: is_control_good {
-    type: yesno
-    sql: ${user_id} > 400   ;;
-#     required_fields: [bucket_id]
-  }
-
 
 }

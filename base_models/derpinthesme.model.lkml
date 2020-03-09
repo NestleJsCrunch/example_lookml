@@ -2,7 +2,7 @@ connection: "thelook"
 
 # include all the views
 include: "/*/*.view.lkml"
-
+include: "/PDT.view.lkml"
 
 ### BASE EXPLORES
 explore: events {
@@ -68,5 +68,3 @@ explore: orders {
   }
   always_join: [users]
 }
-
-### CUSTOM EXPLORES
