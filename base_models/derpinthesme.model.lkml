@@ -1,4 +1,5 @@
 connection: "thelook"
+include: "datagroups.model.lkml"
 
 # include all the views
 include: "/*/*.view.lkml"
@@ -67,4 +68,17 @@ explore: orders {
     relationship: many_to_one
   }
   always_join: [users]
+}
+
+explore: my_explore {
+  from: orders
+  always_filter: {
+    filters: [tend: "yes"]
+    filters: [tstart: "yes"]
+
+  }
+}
+
+datagroup: test {
+  sql_trigger: @{datagrouptrigger1} ;;
 }

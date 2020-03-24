@@ -59,4 +59,35 @@ measure: liquid_nodim {
     sql: ${TABLE}.status ;;
   }
 
+  dimension: year_num {
+    type: number
+    sql: ${created_year} ;;
+  }
+
+  measure: max_year {
+    type: max
+    sql: ${year_num} ;;
+  }
+
+  dimension: dimension_fill {
+    type: string
+    case:
+    {
+      when: { sql: ${status}='complete';; label:"complete"}
+      when: { sql: ${status}='pending';; label:"pending"}
+      when: { sql: ${status}='cancelled';; label:"cancelled"}
+      when: { sql: ${status}='other';; label:"other"}
+
+    }
+  }
+
+  parameter: bad_param {
+    type: string
+    default_value: "Charles Schwab & Co., Inc.,"
+  }
+  dimension: bad_sql {
+    type: string
+    sql: 'Charles Schwab & Co., Inc.,' ;;
+  }
+
 }

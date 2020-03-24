@@ -54,7 +54,14 @@ dimension: offset_month {
 
   dimension: status {
     type: string
-    sql: ${TABLE}.status ;;
+    case: {
+    when: { sql:${TABLE}.status = "complete" ;; label:"complete" }
+    when: { sql:${TABLE}.status = "pending" ;; label:"pending" }
+    when: { sql:${TABLE}.status = "cancelled" ;; label:"cancelled" }
+    when: { sql:${TABLE}.status = "other" ;; label:"other" }
+  }
+  link: {url: "/explore/derpinthesme/orders?fields=orders.status,orders.created_year&f[orders.status]={{ value }}"
+        label:"my link"}
   }
 
   dimension: user_id {
@@ -69,36 +76,35 @@ dimension: offset_month {
     drill_fields: [id,created_date,user_id]
     }
 
-
-  dimension: year_num {
-    type: number
-    sql: ${created_year} ;;
-  }
-
-  measure: max_year {
-    type: max
-    sql: ${year_num} ;;
-  }
-
-  dimension: dimension_fill {
+  dimension: selfserve_dashboardurl_creative{
+    view_label: " Transaction Event"
     type: string
-    case:
-    {
-    when: { sql: ${status}='complete';; label:"complete"}
-    when: { sql: ${status}='pending';; label:"pending"}
-    when: { sql: ${status}='cancelled';; label:"cancelled"}
-    when: { sql: ${status}='other';; label:"other"}
+    sql: ${TABLE}.id;;
 
+    link: {label: "drill out" url: "https://advertiser.vungle.com/creatives?search={{ value }}" }
   }
-}
 
-  parameter: bad_param {
-    type: string
-    default_value: "Charles Schwab & Co., Inc.,"
+  dimension_group: previous_created {
+    type: time
+    sql: date_add(${created_date_date},interval -1 day) ;;
   }
-  dimension: bad_sql {
-    type: string
-    sql: 'Charles Schwab & Co., Inc.,' ;;
+
+  dimension: tend {
+    type: yesno
+    sql: case
+    when ${created_date_date} < extract_date(now()) then 'yes'
+    else 'no'
+    ;;
   }
+  dimension: tstart {
+    type: yesno
+    sql: case
+          when ${created_date_date} > date_sub(extract_date(now()),interval 90) then 'yes'
+          else 'no'
+          ;;
+  }
+
+
+  set: sett { fields:[user_id,status] }
 
 }
