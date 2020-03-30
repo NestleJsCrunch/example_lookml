@@ -51,6 +51,7 @@ view: pdt {
   dimension: date {
     type: string
     sql: ${TABLE}.date ;;
+    drill_fields: [date,date_drill,string,number]
   }
   dimension: string {
     type: string

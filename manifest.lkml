@@ -15,6 +15,7 @@ constant: project_name {
 ## Constants
 constant: sql_snip {
   value: "${id}"
+  export: override_optional
 }
 
 constant: reuse_sql1 {
@@ -50,6 +51,12 @@ constant: mysql_ddiff {
 }
 constant: bq_ddiff {
   value: "DATE_DIFF("
+}
+
+constant: filtered_measure_check {
+  value: "case when ${status} = {[ fw_constants.liquid_param._parameter_value }}
+    then yes
+    else no"
 }
 
 #####

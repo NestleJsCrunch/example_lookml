@@ -38,8 +38,6 @@ measure: constant_sub2 {
   sql: @{subquery} ;;
 }
 
-# use a constant to define a derived table
-
 # use a constant to write an incomplete query
 
 measure: mysql_ddiff {
@@ -65,20 +63,47 @@ measure: mysql_ddiff {
     filters: {field: id value: "@{list}"
     }
   }
-# use a constant to define a dimension
-
-# use a constant to partially define a dimension
 
 # use a constant to create a liquid variable
 
+  parameter: liquid_param {
+    type: string
+    allowed_value: {label: "cancelled" value: "cancelled"}
+    allowed_value: {label: "pending" value: "pending"}
+    allowed_value: {label: "complete" value: "complete"}
+  }
+
+  dimension: satisfies_filter {
+    type: yesno
+    sql:
+    @{filtered_measure_check}
+    end ;;
+  }
+
+  measure: filtered_by_param {
+    type: count
+    filters: [satisfies_filter1: "yes"]
+  }
+
+  dimension: case_case {
+    type: string
+    sql: case when @{filtered_measure_check} = 'yes' then ${created_date_date}
+      else ${id}
+      end
+    ;;
+  }
+
+
 # use a constant to bring in lexp stuff
+
+dimension: expressions {
+  type: string
+  expression: @{filtered_measure_check} ;;
+}
 
 # use a constant to create a massive liquid if
 
 # use a constant to create consistant sets of formatting
-
-
-
 
   dimension: con_id {
     type: string
@@ -96,4 +121,8 @@ measure: mysql_ddiff {
   }
 }
 
+explore: fw_constants {}
+
 # search in a list with constants in your derived table
+
+# use a constant to define a derived table
