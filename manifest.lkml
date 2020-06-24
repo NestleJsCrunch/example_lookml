@@ -1,3 +1,4 @@
+
 project_name: "derpinthesme"
 constant: project_name {
   value: "staging"
@@ -70,3 +71,12 @@ constant: filtered_measure_check {
 
 
 ### Experimental
+
+project_name: "derpinthesmesme"
+
+# # Use local_dependency: To enable referencing of another project
+# # on this instance with include: statements
+#
+local_dependency: {
+  project: "derpinthesme"
+}
