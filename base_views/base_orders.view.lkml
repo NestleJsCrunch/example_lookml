@@ -21,6 +21,11 @@ dimension: offset_month {
   sql:  DATE_ADD(${TABLE}.created_at, INTERVAL 1 month) ;;
 }
 
+dimension: createdstring {
+  type: string
+  sql: ${TABLE}.created_at ;;
+}
+
   dimension_group: created {
     type: time
     timeframes: [
@@ -105,6 +110,46 @@ dimension: offset_month {
   }
 
 
-  set: sett { fields:[user_id,status] }
+### scratchpad
+
+parameter: test {
+  type: unquoted
+  allowed_value: {
+    label: "Select Sum"
+    value: "SUM"
+  }
+  allowed_value: {
+    label: "Select Count"
+    value: "COUNT"
+  }
+}
+
+filter: test2 {
+  type: string
+}
+
+measure: dynamic {
+  type: number
+  sql: {$ parameter test %}(${id}) ;;
+}
+
+dimension: dynamic2 {
+  type: string
+  sql: {% condition test2 %} ${status} {% endcondition %} ;;
+}
+
+
+dimension: link {
+  type: string
+  sql: ${TABLE}.id ;;
+  link: {
+    label: "Testing Filter Warning"
+    url: "/dashboards/512?dynamic2={{ _filters['orders.test2'] | url_encode }}"
+  }
+}
+
+
+
+
 
 }

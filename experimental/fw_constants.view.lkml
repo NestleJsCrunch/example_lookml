@@ -82,7 +82,7 @@ measure: mysql_ddiff {
 
   measure: filtered_by_param {
     type: count
-    filters: [satisfies_filter1: "yes"]
+    # filters: [satisfies_filter1: "yes"]
   }
 
   dimension: case_case {
@@ -121,7 +121,7 @@ dimension: expressions {
   }
 }
 
-explore: fw_constants {}
+# explore: fw_constants {}
 
 # search in a list with constants in your derived table
 

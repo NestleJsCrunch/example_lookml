@@ -1,9 +1,8 @@
 connection: "thelook"
-include: "datagroups.model.lkml"
-
 # include all the views
 include: "/*/*.view.lkml"
 include: "/PDT.view.lkml"
+
 
 ### BASE EXPLORES
 explore: events {
@@ -77,8 +76,4 @@ explore: my_explore {
     filters: [tstart: "yes"]
 
   }
-}
-
-datagroup: test {
-  sql_trigger: @{datagrouptrigger1} ;;
 }
