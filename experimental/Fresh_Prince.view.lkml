@@ -59,15 +59,15 @@ measure: liquid_nodim {
     sql: ${TABLE}.status ;;
   }
 
-  dimension: year_num {
-    type: number
-    sql: ${created_year} ;;
-  }
+#   dimension: year_num {
+#     type: number
+#     sql: ${created_year} ;;
+#   }
 
-  measure: max_year {
-    type: max
-    sql: ${year_num} ;;
-  }
+#   measure: max_year {
+#     type: max
+#     sql: ${year_num} ;;
+#   }
 
   dimension: dimension_fill {
     type: string
