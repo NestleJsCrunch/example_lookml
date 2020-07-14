@@ -142,12 +142,22 @@ dimension: dynamic2 {
 dimension: link {
   type: string
   sql: ${TABLE}.id ;;
+  html: <a href="{{ value }}">{{ orders.status._value }}</a> ;;
   link: {
-    label: "Testing Filter Warning"
-    url: "/dashboards/512?dynamic2={{ _filters['orders.test2'] | url_encode }}"
+    label: "Listen to Call"
+    url: "{{ value }}"
+    icon_url: "https://twilio-cms-prod.s3.amazonaws.com/original_images/twilio-mark-red.png"
+# icon_url: "https://www.twilio.com/marketing/bundles/company-brand/img/logos/red/twilio-logo-red.png"
   }
+
 }
 
+
+measure: median_test {
+  type: average_distinct
+  sql: ${id} ;;
+  sql_distinct_key: ${user_id} ;;
+}
 
 
 
