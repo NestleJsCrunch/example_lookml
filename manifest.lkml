@@ -11,6 +11,17 @@ constant: project_name {
 # }
 
 
+# remote_dependency: test {
+#   url: "@{building}"
+#   ref: "@{sql_snip}"
+# }
+
+constant: reference {
+  value: "39dcc82a9df3e1b1000447b9c32073f985305b52"
+}
+constant: git_url {
+  value: "git://github.com/NestleJsCrunch/MasterSMEDev.git"
+}
 #####
 
 ## Constants

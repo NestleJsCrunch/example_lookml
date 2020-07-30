@@ -153,12 +153,21 @@ dimension: link {
 }
 
 
-measure: median_test {
-  type: average_distinct
-  sql: ${id} ;;
-  sql_distinct_key: ${user_id} ;;
+
+measure: drilling_from {
+  type: count
+  link: {
+    label: "link out"
+    url: "https://dcl.dev.looker.com/explore/derpinthesme/orders?fields=orders.created_date,orders.id&f[orders.status]=complete&limit=500&query_timezone=America%2FNew_York&vis=%7B%7D&filter_config=%7B%22orders.status%22%3A%5B%7B%22type%22%3A%22is%22%2C%22values%22%3A%5B%7B%22constant%22%3A%22{{ status._value }}%22%7D%2C%7B%7D%5D%2C%22id%22%3A0%7D%5D%7D&origin=share-expanded"
+  }
 }
 
+
+measure: percentile_test {
+  type: percentile
+  sql: ${user_id} ;;
+  percentile: 25
+}
 
 
 
