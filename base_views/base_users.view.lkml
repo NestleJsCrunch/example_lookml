@@ -74,6 +74,7 @@ view: users {
 
   measure: count {
     type: count
+    drill_fields: [zip]
   }
 
 

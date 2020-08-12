@@ -1,13 +1,9 @@
-
 ---
-navigation:true
+navigation:
+  - document_1
+  - testmarkdown
+  - document_2
+  - interesting
 ---
 
-
-## document 1
-
-hsxafljkbaskjlfdHJKSZbdsa
-
-## document 2
-
-sajkghljkaqfkjlasgdjkhasjdhk
+asdfjhkvadshjk

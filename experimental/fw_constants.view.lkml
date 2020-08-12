@@ -85,13 +85,13 @@ measure: mysql_ddiff {
     # filters: [satisfies_filter1: "yes"]
   }
 
-  dimension: case_case {
-    type: string
-    sql: case when @{filtered_measure_check} = 'yes' then ${created_date_date}
-      else ${id}
-      end
-    ;;
-  }
+  # dimension: case_case {
+  #   type: string
+  #   sql: case when @{filtered_measure_check} = 'yes' then ${created_date_date}
+  #     else ${id}
+  #     end
+  #   ;;
+  # }
 
 
 # use a constant to bring in lexp stuff

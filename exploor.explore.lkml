@@ -1,3 +1,4 @@
+include: "dynamic_picture_selector.view.lkml"
 include: "/*/*.view.lkml"
 
 explore: base_ndt_explore {

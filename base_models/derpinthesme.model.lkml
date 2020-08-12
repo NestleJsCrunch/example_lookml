@@ -73,11 +73,11 @@ explore: orders {
   always_join: [users]
 }
 
-explore: my_explore {
-  from: orders
-  always_filter: {
-    filters: [tend: "yes"]
-    filters: [tstart: "yes"]
+# explore: my_explore {
+#   from: orders
+#   always_filter: {
+#     filters: [tend: "yes"]
+#     filters: [tstart: "yes"]
 
-  }
-}
+#   }
+# }
