@@ -4,6 +4,7 @@ include: "/*/*.view.lkml"
 include: "/PDT.view.lkml"
 
 
+
 ### testing
 ### testing more
 ### testing thrice
@@ -81,3 +82,8 @@ explore: orders {
 
 #   }
 # }
+
+explore: +orders {
+
+  label: "derp"
+}

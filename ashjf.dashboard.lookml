@@ -1,5 +1,5 @@
-- dashboard: defining_explores_here
-  title: Defining Explores Here
+- dashboard: ashjf
+  title: Ashjf
   layout: newspaper
   tile_size: 100
 
