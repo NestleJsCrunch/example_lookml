@@ -237,3 +237,11 @@ dimension: createdstring {
 #     sql_on: 1=1 ;;
 #   }
 # }
+
+view: +orders {
+  dimension: foo {
+    label: "do not use, broken"
+    type: string
+    sql: ${TABLE}.foo ;;
+  }
+}
