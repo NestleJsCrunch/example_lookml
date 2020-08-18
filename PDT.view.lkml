@@ -1,6 +1,6 @@
 # view: pdt {
-#  derived_table: {
-#    sql:
+#   derived_table: {
+#     sql:
 # select "id","bad_column", "arbitrary_number", "other_number"
 # UNION
 # select 1,"word",'', 0
@@ -19,7 +19,7 @@
 # UNION
 # select 8,"something",1,32
 # ;;
-#  }
+#   }
 # dimension: id {primary_key:yes}
 # dimension: bad_column {}
 # dimension: arbitrary_number {}
@@ -46,6 +46,8 @@ view: pdt {
     union
     select '2019-03-03 11:00:00 f', 'kk', 5
     ;;
+    sql_trigger_value: SELECT FLOOR(UNIX_TIMESTAMP() / (1*60*60))
+ ;;
   }
 
   dimension: date {
