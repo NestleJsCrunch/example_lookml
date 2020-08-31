@@ -89,8 +89,12 @@ dimension: createdstring {
 
   measure: count {
     type: count
-    # drill_fields: [id,created_date,user_id, test_drill]
+    drill_fields: [id,created_date,user_id]
     }
+
+
+
+
 
 # measure: test_drill {
 #   type: count
@@ -237,11 +241,3 @@ dimension: createdstring {
 #     sql_on: 1=1 ;;
 #   }
 # }
-
-view: +orders {
-  dimension: foo {
-    label: "do not use, broken"
-    type: string
-    sql: ${TABLE}.foo ;;
-  }
-}
