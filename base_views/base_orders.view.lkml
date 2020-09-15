@@ -2,7 +2,7 @@ include: "/*/*.view.lkml"
 
 
 view: orders {
-  sql_table_name: demo_db_generator.orders ;;
+  sql_table_name:@{connection} ;;
 
   dimension: id {
     primary_key: yes
@@ -92,7 +92,37 @@ dimension: createdstring {
     drill_fields: [id,created_date,user_id]
     }
 
+    dimension: test_link {
+      type: string
+      sql: ${TABLE}.id ;;
+      html: Link to call ;;
+      link: {label:"link out"
+        url:"https://www.google.com?q={{ value }}"}
+    }
 
+
+    dimension: test {
+      type: string
+      sql: @{liquid} ;;
+    }
+
+parameter: d1 {
+  type: date
+}
+
+parameter: d2 {
+  type: date_time
+}
+
+dimension: d1a {
+  type: string
+  sql: {% parameter d1 %} ;;
+}
+
+dimension: d2a {
+  type: string
+  sql: {% parameter d2 %} ;;
+}
 
 
 

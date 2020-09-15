@@ -71,6 +71,13 @@ constant: filtered_measure_check {
     else no"
 }
 
+constant: liquid {
+  value: "{{ _user_attributes['email'] }}"
+}
+
+constant: connection {
+  value: "demo_db_generator.orders"
+}
 #####
 
 ### String Formatting
