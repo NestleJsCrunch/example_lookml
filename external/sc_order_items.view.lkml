@@ -1,13 +1,24 @@
-# include: "/*/*.view.lkml"
+view: sc_order_items {
 
+  # adding pk and etc
+  sql_table_name: @{table_items}
+  ;;
 
-view: order_items {
-  sql_table_name: demo_db.order_items ;;
+# --  (
+# --  @{uuid_begin} from @{table_items}
+# --  )
+
+    # dimension: true_pk {
+    #   type: string
+    #   hidden: yes
+    #   primary_key: yes
+    #   sql: ${TABLE}.true_pk ;;
+    # }
 
   dimension: id {
-    primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    primary_key: yes
   }
 
   dimension: inventory_item_id {

@@ -1,4 +1,4 @@
-view: orders {
+view: pic_selector {
   sql_table_name: demo_db.orders ;;
   drill_fields: [id]
 
@@ -78,15 +78,5 @@ view: orders {
     drill_fields: [id]
   }
 
-#   measure: test_html {
-#     type: count
-#     html: {% if value < 1 }
-#       <ul>
-#       <h1>"TRUE" </h1>
-#
-#       </ul>
-#          {% else %}
-#       <p>  "FAlSE" </p>
-#         {% endif %} ;;
-#   }
+
 }

@@ -1,7 +1,7 @@
 connection: "thelook"
 # include all the views
-include: "/*/*.view.lkml"
-include: "/PDT.view.lkml"
+include: "/base_views/*.view.lkml"
+
 
 
 
@@ -72,18 +72,4 @@ explore: orders {
     relationship: many_to_one
   }
   always_join: [users]
-}
-
-# explore: my_explore {
-#   from: orders
-#   always_filter: {
-#     filters: [tend: "yes"]
-#     filters: [tstart: "yes"]
-
-#   }
-# }
-
-explore: +orders {
-
-  label: "derp"
 }

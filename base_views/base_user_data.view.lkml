@@ -1,5 +1,5 @@
 
-include: "/*/*.view.lkml"
+# include: "/*/*.view.lkml"
 
 view: user_data {
   sql_table_name: demo_db.user_data ;;

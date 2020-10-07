@@ -1,4 +1,4 @@
-include: "/*/*.view.lkml"
+# include: "/*/*.view.lkml"
 
 
 view: products {

@@ -1,14 +1,26 @@
-# include: "/*/*.view.lkml"
+view: sc_users {
 
+  # adding pk and etc
+  sql_table_name: @{table_users}
+;;
 
-###
-view: users {
-  sql_table_name: demo_db_generator.users ;;
+# -- (
+# -- @{uuid_begin} from @{table_users}
+# -- )
 
+  # pk defined and hidden
+  # dimension: true_pk {
+  #   type: string
+  #   hidden: yes
+  #   primary_key: yes
+  #   sql: ${TABLE}.true_pk ;;
+  # }
+
+  # base dims
   dimension: id {
-    primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    primary_key: yes
   }
 
   dimension: age {
@@ -72,10 +84,6 @@ view: users {
     sql: ${TABLE}.zip ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [zip]
-  }
-
+  measure: count {}
 
 }
