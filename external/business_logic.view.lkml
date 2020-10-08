@@ -120,6 +120,7 @@ parameter: grouping_selector {
     label_from_parameter: grouping_selector
     sql:
 
+TRIM(
 CONCAT(
         -- convert all to string
       CAST(
@@ -149,12 +150,12 @@ CONCAT(
       when {% parameter time_grouping_selector %} = 'user'
       and {% parameter timeframe_selector %} = 'year'
       then ${sc_users.created_year}
-      else
-      ''
+      else ''
       end
 
+      {% else %}
+      ' '
       {% endif %}
-
         AS CHAR),
 
         -- convert all to string
@@ -170,8 +171,12 @@ CONCAT(
       else ''
       end
 
+    {% else %}
+    ' '
+
     {% endif %}
         AS CHAR)
+)
 )
     ;;
   }
