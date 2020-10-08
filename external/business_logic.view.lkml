@@ -52,6 +52,10 @@ parameter: grouping_selector {
     label: "Users Gender"
     value: "gender"
   }
+  allowed_value: {
+    label: "No Metric Grouping"
+    value: "no"
+  }
   }
 
   parameter: time_grouping_selector {
@@ -63,6 +67,10 @@ parameter: grouping_selector {
     allowed_value: {
       label: "User Creation"
       value: "user"
+    }
+    allowed_value: {
+      label: "No Time Grouping"
+      value: "no"
     }
   }
 
@@ -83,6 +91,10 @@ parameter: grouping_selector {
     allowed_value: {
       label: "Year"
       value: "year"
+    }
+    allowed_value: {
+      label: "No Timeframe"
+      value: "no"
     }
 
   }
@@ -108,7 +120,10 @@ parameter: grouping_selector {
     label_from_parameter: grouping_selector
     sql:
 
-    {% if time_grouping_selector._is_filtered %}
+CONCAT(
+        -- convert all to string
+      CAST(
+    {% if time_grouping_selector._is_filtered  %}
       case
       when {% parameter time_grouping_selector %} = 'order'
       and {% parameter timeframe_selector %} = 'day'
@@ -134,9 +149,17 @@ parameter: grouping_selector {
       when {% parameter time_grouping_selector %} = 'user'
       and {% parameter timeframe_selector %} = 'year'
       then ${sc_users.created_year}
+      else
+      ''
       end
 
-    {% elsif grouping_selector._is_filtered %}
+      {% endif %}
+
+        AS CHAR),
+
+        -- convert all to string
+        CAST(
+    {% if grouping_selector._is_filtered %}
       case
       when {% parameter grouping_selector %} = 'status'
       then ${sc_orders.status}
@@ -144,11 +167,12 @@ parameter: grouping_selector {
       then ${sc_users.state}
       when {% parameter grouping_selector %} = 'gender'
       then ${sc_users.gender}
+      else ''
       end
 
-    {% else %}
-        'Please select a grouping to populate this field'
     {% endif %}
+        AS CHAR)
+)
     ;;
   }
 

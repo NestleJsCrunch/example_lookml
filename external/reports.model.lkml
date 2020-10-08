@@ -19,4 +19,5 @@ explore: sc_order_items {
   fields: [sc_orders.dynamic_fields*]
 
 
+
 }
