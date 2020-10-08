@@ -2,7 +2,7 @@ connection: "thelook"
 # include all the views
 include: "/base_views/*.view.lkml"
 
-
+fiscal_month_offset: 5
 
 
 ### testing

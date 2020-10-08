@@ -17,6 +17,9 @@ measure: dcount_users {
   sql: ${sc_users.id} ;;
 }
 
+
+# bringing some stuff in from the
+
 # now let's do some cool stuff
 
 parameter: metric_selector{
@@ -63,6 +66,43 @@ parameter: grouping_selector {
     }
   }
 
+  parameter: timeframe_selector {
+    type: string
+    allowed_value: {
+      label: "Month"
+      value: "month"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "week"
+    }
+    allowed_value: {
+      label: "Day"
+      value: "day"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "year"
+    }
+
+  }
+
+  filter: year_selector {
+    label: "Year to Analyze"
+    type: date
+    sql:
+
+    {% if time_grouping_selector._is_filtered and time_grouping_selector._value== 'order' %}
+    {% condition year_selector %} ${sc_orders.created_date} {% endcondition %}
+    {% elsif time_grouping_selector._is_filtered and time_grouping_selector._value== 'user' %}
+    {% condition year_selector %} ${sc_users.created_date} {% endcondition %}
+    {% else %}
+    1=1
+    {% endif %}
+
+    ;;
+  }
+
   dimension: output_dim {
     type: string
     label_from_parameter: grouping_selector
@@ -71,9 +111,29 @@ parameter: grouping_selector {
     {% if time_grouping_selector._is_filtered %}
       case
       when {% parameter time_grouping_selector %} = 'order'
+      and {% parameter timeframe_selector %} = 'day'
       then ${sc_orders.created_date}
+      when {% parameter time_grouping_selector %} = 'order'
+      and {% parameter timeframe_selector %} = 'week'
+      then ${sc_orders.created_week}
+      when {% parameter time_grouping_selector %} = 'order'
+      and {% parameter timeframe_selector %} = 'month'
+      then ${sc_orders.created_month}
+      when {% parameter time_grouping_selector %} = 'order'
+      and {% parameter timeframe_selector %} = 'year'
+      then ${sc_orders.created_year}
       when {% parameter time_grouping_selector %} = 'user'
+      and {% parameter timeframe_selector %} = 'day'
       then ${sc_users.created_date}
+      when {% parameter time_grouping_selector %} = 'user'
+      and {% parameter timeframe_selector %} = 'week'
+      then ${sc_users.created_week}
+      when {% parameter time_grouping_selector %} = 'user'
+      and {% parameter timeframe_selector %} = 'month'
+      then ${sc_users.created_month}
+      when {% parameter time_grouping_selector %} = 'user'
+      and {% parameter timeframe_selector %} = 'year'
+      then ${sc_users.created_year}
       end
 
     {% elsif grouping_selector._is_filtered %}
@@ -85,6 +145,7 @@ parameter: grouping_selector {
       when {% parameter grouping_selector %} = 'gender'
       then ${sc_users.gender}
       end
+
     {% else %}
         'Please select a grouping to populate this field'
     {% endif %}
@@ -112,6 +173,6 @@ parameter: grouping_selector {
   }
 
 set: dynamic_fields {
-  fields: [output_dim,output_measure,grouping_selector,metric_selector,time_grouping_selector]
+  fields: [output_dim,output_measure,grouping_selector,metric_selector,time_grouping_selector, timeframe_selector, year_selector]
 }
 }
