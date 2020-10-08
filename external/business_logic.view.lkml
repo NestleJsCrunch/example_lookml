@@ -162,11 +162,11 @@ CONCAT(
     {% if grouping_selector._is_filtered %}
       case
       when {% parameter grouping_selector %} = 'status'
-      then ${sc_orders.status}
+      then CONCAT(' ', ${sc_orders.status})
       when {% parameter grouping_selector %} = 'state'
-      then ${sc_users.state}
+      then CONCAT(' ', ${sc_users.state})
       when {% parameter grouping_selector %} = 'gender'
-      then ${sc_users.gender}
+      then CONCAT(' ', ${sc_users.gender})
       else ''
       end
 
