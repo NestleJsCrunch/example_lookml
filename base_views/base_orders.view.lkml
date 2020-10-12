@@ -44,8 +44,6 @@ dimension: createdstring {
   dimension: status {
     type: string
    sql: ${TABLE}.status ;;
-  html:
-  {{ rendered_value }} <br>  {{ id._rendered_value }} ;;
   }
 
   dimension: user_id {
