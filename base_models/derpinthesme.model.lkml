@@ -2,11 +2,6 @@ connection: "thelook"
 # include all the views
 include: "/base_views/*.view.lkml"
 
-### last pr test
-### testing PRs
-### testing
-### testing more
-### testing thrice
 
 ### BASE EXPLORES
 explore: events {
