@@ -77,5 +77,8 @@ view: users {
     drill_fields: [zip]
   }
 
+filter: test_fil {
+  type: string
+}
 
 }
