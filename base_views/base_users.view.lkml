@@ -3,7 +3,7 @@
 
 ###
 view: users {
-  sql_table_name: demo_db_generator.users ;;
+  sql_table_name: @{table_users} ;;
 
   dimension: id {
     primary_key: yes

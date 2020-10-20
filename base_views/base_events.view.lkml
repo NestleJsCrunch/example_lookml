@@ -1,7 +1,7 @@
 # include: "/*/*.view.lkml"
 
 view: events {
-  sql_table_name: demo_db.events ;;
+  sql_table_name: @{table_events} ;;
 
   dimension: id {
     primary_key: yes
