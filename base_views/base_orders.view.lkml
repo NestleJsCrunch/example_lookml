@@ -1,5 +1,5 @@
 view: orders {
-  sql_table_name: demo_db.orders
+  sql_table_name: @{table_orders}
   ;;
 
   dimension: id {
@@ -43,7 +43,7 @@ dimension: createdstring {
 
   dimension: status {
     type: string
-   sql: ${TABLE}.status ;;
+    sql: ${TABLE}.status ;;
   }
 
   dimension: user_id {
@@ -51,6 +51,10 @@ dimension: createdstring {
     sql: ${TABLE}.user_id ;;
   }
 
+  measure: count {
+    type: count
+  }
 
 
 }
+

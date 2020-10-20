@@ -2,7 +2,7 @@
 # include: "/*/*.view.lkml"
 
 view: user_data {
-  sql_table_name: demo_db.user_data ;;
+  sql_table_name: @{table_udata};;
 
   dimension: id {
     primary_key: yes

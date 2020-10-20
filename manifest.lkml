@@ -5,11 +5,16 @@ constant: project_name {
   value: "staging"
 }
 
-##### Constants for table names / connection name
+### --- table / connection names --- ###
 
 constant: connection_name {
   value: "thelook"
 }
+
+constant: alternate_connection {
+  value: "philip_martinelli"
+}
+
 
 constant: table_orders {
   value: "demo_db.orders"
@@ -19,8 +24,12 @@ constant: table_users {
   value: "demo_db.users"
 }
 
-constant: table_items {
+constant: table_oitems {
   value: "demo_db.order_items"
+}
+
+constant: table_iitems {
+  value: "demo_db.inventory_items"
 }
 
 constant: table_products {
@@ -31,6 +40,27 @@ constant: table_events {
   value: "demo_db.events"
 }
 
-constant: uuid_begin{
+constant: table_udata {
+  value: "demo_db.user_data"
+}
+
+constant: table_flights {
+  value: "demo_db.flights"
+}
+
+#### -------- sql snippets -------- ###
+
+constant: bq_updt_begin{
   value: "select GENERATE_UUID() as true_pk, *"
+}
+
+constant: mysql_updt_begin {
+  value: "select ROW_NUMBER() OVER (PARTITION BY 1 ORDER BY 1), *"
+}
+
+### ----- test constants ------ ###
+
+
+constant: font {
+  value: "<font size=3px>{{ value }}</font>"
 }

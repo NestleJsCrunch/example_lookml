@@ -1,4 +1,4 @@
-connection: "thelook"
+connection: "@{connection_name}"
 
 include: "/external/*.view.lkml"                # include all views in the views/ folder in this project
 

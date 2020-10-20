@@ -1,5 +1,5 @@
 view: flights {
-  sql_table_name: demo_db.flights ;;
+  sql_table_name: @{table_flights} ;;
 
   dimension: arr_delay {
     type: number

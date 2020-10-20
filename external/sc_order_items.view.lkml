@@ -1,7 +1,7 @@
 view: sc_order_items {
 
   # adding pk and etc
-  sql_table_name: @{table_items}
+  sql_table_name: @{table_oitems}
   ;;
 
 # --  (

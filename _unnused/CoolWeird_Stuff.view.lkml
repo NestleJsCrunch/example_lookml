@@ -404,3 +404,28 @@
 #   }
 
 # }
+
+
+# line break
+#   html:
+#   {{ fielda._value }}
+#     <br>
+#   {{ fieldb._value }}
+
+#   ;;
+
+### aggregate aggregates
+
+# measure: aggregate_of_aggregate {
+#   type: number
+#   sql:
+#     count(*)/(select count(*) from @{table_orders})
+#     ;;
+# }
+
+# measure: aggregate_of_aggregate2 {
+#   type: sum
+#   sql:
+#     (select count(*) from @{table_orders} group by ${status})
+#     ;;
+# }
