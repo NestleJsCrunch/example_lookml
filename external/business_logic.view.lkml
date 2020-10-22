@@ -1,5 +1,11 @@
 view: business_logic {
 
+### Add fields to the set
+set: dynamic_fields {
+  fields: [output_dim,output_measure,grouping_selector,metric_selector,time_grouping_selector, timeframe_selector, year_selector, grouping_selector_2,output_dim2]
+}
+
+
 # let's start with some simple metrics
 
 measure: sum_sales {
@@ -18,7 +24,7 @@ measure: dcount_users {
 }
 
 
-# bringing some stuff in from the
+### s1
 
 # now let's do some cool stuff
 
@@ -201,7 +207,74 @@ CONCAT(
 
   }
 
-set: dynamic_fields {
-  fields: [output_dim,output_measure,grouping_selector,metric_selector,time_grouping_selector, timeframe_selector, year_selector]
-}
+  ### s2
+
+  parameter: grouping_selector_2 {
+    type: unquoted
+    allowed_value: {
+      label: "Order Status"
+      value: "sc_orders.status"
+    }
+    allowed_value: {
+      label: "User State"
+      value: "sc_users.state"
+    }
+    allowed_value: {
+      label: "User Gender"
+      value: "sc_users.gender"
+    }
+  }
+
+  dimension: output_dim2 {
+    type: string
+    sql: {% parameter grouping_selector_2 %} ;;
+  }
+
+  parameter: aggregation_selector {
+    type: unquoted
+    allowed_value: {
+      label: "Max"
+      value: "MAX"
+    }
+    allowed_value: {
+      label: "Min"
+      value: "MIN"
+    }
+    allowed_value: {
+      label: "Sum"
+      value: "SUM"
+    }
+    allowed_value: {
+      label: "Count"
+      value: "COUNT"
+    }
+    allowed_value: {
+      label: "Sum Distinct"
+      value: "Count Distinct"
+    }
+  }
+
+  parameter: metric_selector2 {
+    type: unquoted
+    allowed_value: {
+      label:  "Sales"
+      value: "sales"
+    }
+    allowed_value: {
+      label: "Orders"
+      value: "orders"
+    }
+    allowed_value: {
+      label: "Users"
+      value: "users"
+    }
+    allowed_value: {
+      label: "Order Date"
+      value:""
+    }
+  }
+
+  measure: output_measure2 {}
+
+
 }

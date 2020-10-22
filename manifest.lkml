@@ -5,7 +5,7 @@ constant: project_name {
   value: "staging"
 }
 
-### --- table / connection names --- ###
+### --- connection names --- ###
 
 constant: connection_name {
   value: "thelook"
@@ -15,7 +15,19 @@ constant: alternate_connection {
   value: "philip_martinelli"
 }
 
+### --- table names --- ###
 
+# bigquery
+
+constant: table_phillip {
+  value: "`potent-arcade-167816.performance_benchmarking.model_complexity`"
+}
+
+constant: table_phillip_bike {
+  value: "`potent-arcade-167816.SF_BS.bikeshare_stations_copy`"
+}
+
+# mysql
 constant: table_orders {
   value: "demo_db.orders"
 }
@@ -55,7 +67,7 @@ constant: bq_updt_begin{
 }
 
 constant: mysql_updt_begin {
-  value: "select ROW_NUMBER() OVER (PARTITION BY 1 ORDER BY 1), *"
+  value: "select ROW_NUMBER() OVER (PARTITION BY 1 ORDER BY 1) as true_pk, *"
 }
 
 ### ----- test constants ------ ###

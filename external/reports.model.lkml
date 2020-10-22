@@ -17,6 +17,7 @@ explore: sc_order_items {
     relationship: many_to_one
   }
   fields: [sc_orders.dynamic_fields*]
+  always_join: [sc_users,sc_orders]
 
 
 
