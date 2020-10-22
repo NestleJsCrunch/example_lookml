@@ -51,6 +51,10 @@ view: sc_orders {
     sql: ${TABLE}.user_id ;;
   }
 
+  measure: count {
+    type: count
+  }
+
 
 # bring in business logic
 extends: [business_logic]
