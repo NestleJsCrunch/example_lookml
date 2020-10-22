@@ -274,7 +274,13 @@ CONCAT(
     }
   }
 
-  measure: output_measure2 {}
+  measure: output_measure2 {
+    type: number
+    sql:
+    {% parameter aggregation_selector %}({% parameter metric_selector2 %})
+    ;;
+
+  }
 
 
 }

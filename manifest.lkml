@@ -1,4 +1,3 @@
-
 project_name: "derpinthesme"
 
 constant: project_name {
