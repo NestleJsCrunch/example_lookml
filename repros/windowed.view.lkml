@@ -53,6 +53,8 @@ view: bikeshare_stations_copy {
   }
 }
 
+explore: bikeshare_stations_copy  {}
+
 view: windowed {
   derived_table: {
   sql:
@@ -74,6 +76,21 @@ dimension: ranking {
   measure: min_date {
     type: date
     sql: min(installation_date) ;;
+  }
+
+  ### FOR THEIR DYNAMIC DIMENSION ###
+
+  filter: landmark_selector {
+    type: string
+    suggest_explore: windowed
+    suggest_dimension: windowed.landmark
+  }
+
+  dimension: landmark_highlight {
+    sql: CASE WHEN {% condition landmark_selector %} ${landmark} {% endcondition %}
+          THEN ${landmark}
+          ELSE 'All Other Places'
+          END;;
   }
 
 
