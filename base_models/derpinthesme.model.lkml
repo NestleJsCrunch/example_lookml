@@ -1,4 +1,5 @@
 connection: "@{connection_name}"
+
 # include all the views
 include: "/base_views/*.view.lkml"
 

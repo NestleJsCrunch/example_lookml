@@ -64,9 +64,9 @@ view: windowed {
 }
 extends: [bikeshare_stations_copy]
 
-dimension: ranking {
-  type: number
-}
+  dimension: ranking {
+    type: number
+  }
 
   measure: max_date {
     type: date

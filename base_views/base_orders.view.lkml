@@ -7,7 +7,19 @@ view: orders {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+  }
 
+  measure: formatting {
+    type: sum
+    sql: ${id} * 1.1 ;;
+    html:
+    {% if value>0 %}
+    <div style="background-color:green;color:white">{{ rendered_value }}</div>
+    {% elsif value<0 %}
+    <div style="background-color:red;color:white">{{ rendered_value }}</div>
+    {% elsif value==0 %}
+    <div style="background-color:yellow;color:white">{{ rendered_value }}</div>
+    {% endif %};;
   }
 
   dimension_group: created {
@@ -28,7 +40,6 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
-
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
@@ -43,26 +54,57 @@ view: orders {
     type: count
   }
 
-  parameter: t1 {
-    type: number
+  dimension: yesno_field {
+    type: yesno
+    sql: ${status} = 'complete';;
   }
 
-  parameter: t2 {}
+  dimension: some_other_field {
+    type: yesno
+    sql: ${status} = 'complete';;
+  }
 
-  measure: yn {
+  measure: only_complete {
+    type: count
+    filters: [yesno_field: "yes",some_other_field: "yes"]
+  }
+
+  parameter: yesnoparam {
+    type: yesno
+    default_value: "yes"
+  }
+
+  parameter: yesnoparam2 {
+    type: yesno
+    default_value: "Yes"
+  }
+
+  dimension: yesnoparam3 {
     type: string
     sql:
-    case when
-    {% parameter t1 %} > ${count}
-    then 'yes'
-    else 'no'
-    end ;;
+    {% parameter yesnoparam %};;
   }
 
-  dimension: s {
-    type: number
-    sql: CAST(${created_year} as INT) ;;
-    value_format: "0"
+  dimension: yesnoparam4 {
+    type: string
+    sql:
+    {% parameter yesnoparam2 %};;
+  }
+
+  dimension: yesnodim {
+    type: yesno
+    sql:
+    {% if yesnoparam._is_filtered %}
+    {% parameter yesnoparam %}
+    {% else %}
+    yes
+    {% endif %}
+    ;;
+  }
+
+  dimension: testarray {
+    type: string
+    sql:  JSON_ARRAY(orders.status, 'foo') ;;
   }
 
 }
