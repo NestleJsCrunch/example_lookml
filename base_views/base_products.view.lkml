@@ -1,7 +1,6 @@
-# include: "/*/*.view.lkml"
 
-
-view: products {
+view: base_products {
+  extension: required
   sql_table_name: @{table_products} ;;
 
   dimension: id {

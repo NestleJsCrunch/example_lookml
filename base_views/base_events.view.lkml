@@ -1,6 +1,6 @@
-# include: "/*/*.view.lkml"
 
-view: events {
+view: base_events {
+  extension: required
   sql_table_name: @{table_events} ;;
 
   dimension: id {
