@@ -1,4 +1,6 @@
-view: orders {
+
+view: base_orders {
+  extension: required
   sql_table_name:
  @{table_orders}
   ;;
@@ -7,19 +9,6 @@ view: orders {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
-  }
-
-  measure: formatting {
-    type: sum
-    sql: ${id} * 1.1 ;;
-    html:
-    {% if value>0 %}
-    <div style="background-color:green;color:white">{{ rendered_value }}</div>
-    {% elsif value<0 %}
-    <div style="background-color:red;color:white">{{ rendered_value }}</div>
-    {% elsif value==0 %}
-    <div style="background-color:yellow;color:white">{{ rendered_value }}</div>
-    {% endif %};;
   }
 
   dimension_group: created {
@@ -52,59 +41,6 @@ view: orders {
 
   measure: count {
     type: count
-  }
-
-  dimension: yesno_field {
-    type: yesno
-    sql: ${status} = 'complete';;
-  }
-
-  dimension: some_other_field {
-    type: yesno
-    sql: ${status} = 'complete';;
-  }
-
-  measure: only_complete {
-    type: count
-    filters: [yesno_field: "yes",some_other_field: "yes"]
-  }
-
-  parameter: yesnoparam {
-    type: yesno
-    default_value: "yes"
-  }
-
-  parameter: yesnoparam2 {
-    type: yesno
-    default_value: "Yes"
-  }
-
-  dimension: yesnoparam3 {
-    type: string
-    sql:
-    {% parameter yesnoparam %};;
-  }
-
-  dimension: yesnoparam4 {
-    type: string
-    sql:
-    {% parameter yesnoparam2 %};;
-  }
-
-  dimension: yesnodim {
-    type: yesno
-    sql:
-    {% if yesnoparam._is_filtered %}
-    {% parameter yesnoparam %}
-    {% else %}
-    yes
-    {% endif %}
-    ;;
-  }
-
-  dimension: testarray {
-    type: string
-    sql:  JSON_ARRAY(orders.status, 'foo') ;;
   }
 
 }

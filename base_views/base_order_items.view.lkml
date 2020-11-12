@@ -1,7 +1,6 @@
-# include: "/*/*.view.lkml"
 
-
-view: order_items {
+view: base_order_items {
+  extension: required
   sql_table_name: @{table_oitems} ;;
 
   dimension: id {

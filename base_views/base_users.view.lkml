@@ -1,8 +1,6 @@
-# include: "/*/*.view.lkml"
 
-
-###
-view: users {
+view: base_users {
+  extension: required
   sql_table_name: @{table_users} ;;
 
   dimension: id {
