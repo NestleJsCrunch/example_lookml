@@ -11,6 +11,9 @@ view: orders {
   #   sql: 'foo' ;;
   # }
 }
+
+### adding thing
+
 view: users {
   extends: [base_users]
 }
