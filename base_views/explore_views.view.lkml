@@ -3,6 +3,13 @@ include: "/base_views/[!explore_views]*.view.lkml"
 
 view: orders {
   extends: [base_orders]
+
+  dimension: status {}
+
+  # dimension: test {
+  #   type:
+  #   sql: 'foo' ;;
+  # }
 }
 view: users {
   extends: [base_users]
