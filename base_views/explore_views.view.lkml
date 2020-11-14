@@ -11,6 +11,9 @@ view: orders {
   #   sql: 'foo' ;;
   # }
 }
+
+### adding thing
+
 view: users {
   extends: [base_users]
 }
@@ -29,3 +32,8 @@ view: products {
 view: user_data {
   extends: [base_user_data]
 }
+
+
+# deploy webhook
+
+# curl -i -X POST -H "X-Looker-Deploy-Secret:cc05580a685c42bbb92ba9a7c10541db" https://dcl.dev.looker.com/webhooks/projects/derpinthesme/deploy/ref/96c484
