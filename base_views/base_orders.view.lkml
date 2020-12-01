@@ -43,4 +43,7 @@ view: base_orders {
     type: count
   }
 
+parameter: test {
+  type: date
+}
 }
