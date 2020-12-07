@@ -68,6 +68,15 @@ view: user_data {
   extends: [base_user_data]
 }
 
+view: bad_ndt {
+  derived_table: {
+    sql:
+
+    select * from @{table_orders} ;;
+    sql_trigger_value: select 1=2 ;;
+  }
+}
+
 
 # deploy webhook
 
