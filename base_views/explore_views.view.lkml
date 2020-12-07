@@ -4,7 +4,42 @@ include: "/base_views/[!explore_views]*.view.lkml"
 view: orders {
   extends: [base_orders]
 
-  dimension: status {}
+  dimension: status {
+  }
+  measure: count {
+    type: count
+    link: {
+      label: "drill"
+      url: "https://dcl.dev.looker.com/dashboards-next/1036?Status={{ orders.status._value | url_encode }}"
+    }
+  }
+
+  dimension: none {
+    type: string
+    sql: @{none} ;;
+  }
+
+  dimension: optional {
+    type: string
+    sql: @{optional} ;;
+  }
+
+  dimension: required {
+    type: string
+    sql: @{required} ;;
+  }
+
+  parameter: test {
+    type: string
+    suggest_dimension: status
+  }
+
+  measure: counta {
+    type: count
+    filters: [
+      status: "{{ orders.test._parameter_value }}"
+    ]
+  }
 
   # dimension: test {
   #   type:
@@ -31,6 +66,15 @@ view: products {
 }
 view: user_data {
   extends: [base_user_data]
+}
+
+view: bad_ndt {
+  derived_table: {
+    sql:
+
+    select * from @{table_orders} ;;
+    sql_trigger_value: select 1=2 ;;
+  }
 }
 
 

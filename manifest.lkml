@@ -100,3 +100,19 @@ constant: formatstuff {
 
   "
 }
+
+
+constant: none {
+  value: "none"
+  export: none
+}
+
+constant: optional {
+  value: "optional"
+  export: override_optional
+}
+
+constant: required {
+  value: "required"
+  export: "override_required"
+}
