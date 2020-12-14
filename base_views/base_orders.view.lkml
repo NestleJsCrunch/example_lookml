@@ -27,11 +27,12 @@ view: base_orders {
       day_of_week_index
     ]
     sql: ${TABLE}.created_at ;;
-  }
+    }
 
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+    label: "blah blah"
   }
 
   dimension: user_id {

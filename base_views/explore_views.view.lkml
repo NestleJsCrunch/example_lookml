@@ -43,6 +43,36 @@ view: orders {
     ]
   }
 
+  dimension_group: test1 {
+    type: time
+    timeframes: [date, week]
+  }
+  dimension_group: test2 {
+    type: time
+    timeframes: [week,date]
+  }
+
+  dimension: 2_date {
+    group_label: "test"
+  }
+
+  dimension: 1_week {
+    group_label: "test"
+
+  }
+
+  dimension: 4_date {
+    label: "date"
+    group_label: "test"
+
+  }
+
+  dimension: 3_week {
+    label: "week"
+    group_label: "test"
+
+  }
+
   # dimension: test {
   #   type:
   #   sql: 'foo' ;;
