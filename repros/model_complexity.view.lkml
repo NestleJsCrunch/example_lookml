@@ -54,20 +54,35 @@ view: model_complexity {
   }
 }
 
-explore: model_complexity {}
+explore: bad_ndt {}
 
 ### derived table example
 
-view: windowedalt {
+view: bad_ndt {
   derived_table: {
+    persist_for: "30 minutes"
     sql:
+  select '2016-01-11T07:00:00.000+00:00' as a
+  union all
+  select '2016-01-11T07:15:00.000+00:00' as a
+  union all
+  select '2016-01-11T07:30:00.000+00:00' as a
+  UNION ALL
+  select '2016-01-11T07:45:00.000+00:00' as a
+  UNION ALL
+  select '2016-01-11T11:00:00.000+00:00' as a
+  union all
+  select '2016-01-11T11:15:00.000+00:00' as a
+  union all
+  select '2016-01-11T11:30:00.000+00:00' as a
+  UNION ALL
+  select '2016-01-11T11:45:00.000+00:00' as a
 
-    SELECT
-    *, rank() over (partition by join_count order by instance desc) as ranking
-    FROM `potent-arcade-167816.performance_benchmarking.model_complexity`
-    ;;
-  }
-  extends: [model_complexity]
+  ;; }
 
-  dimension: ranking {}
+    dimension_group: test {
+      type: time
+      sql: ${TABLE}.a ;;
+      convert_tz: no
+    }
 }

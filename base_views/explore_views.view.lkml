@@ -1,6 +1,8 @@
 include: "/base_views/[!explore_views]*.view.lkml"
 
 
+### adding comment
+
 view: orders {
   extends: [base_orders]
 
@@ -69,12 +71,44 @@ view: user_data {
 }
 
 view: bad_ndt {
-  derived_table: {
-    sql:
+    sql_table_name:
+    (
+  select '2016-01-11T07:00:00.000+00:00' as a
+  union all
+  select '2016-01-11T07:15:00.000+00:00' as a
+  union all
+  select '2016-01-11T07:30:00.000+00:00' as a
+  UNION ALL
+  select '2016-01-11T07:45:00.000+00:00' as a
+  UNION ALL
+  select '2016-01-11T11:00:00.000+00:00' as a
+  union all
+  select '2016-01-11T11:15:00.000+00:00' as a
+  union all
+  select '2016-01-11T11:30:00.000+00:00' as a
+  UNION ALL
+  select '2016-01-11T11:45:00.000+00:00' as a
+  )
+  ;;
 
-    select * from @{table_orders} ;;
-    sql_trigger_value: select 1=2 ;;
+  dimension_group: test {
+    type: time
+    sql: ${TABLE}.a ;;
+    convert_tz: no
   }
+
+  dimension: workingat7am {
+    type: string
+    sql:
+    case when
+    cast(substring(${test_time_of_day},1,2) as signed) >=7 and cast(substring(${test_time_of_day},3,2) as signed) < 7
+    then 'working at 7am'
+    else 'undefined'
+    end;;
+  }
+}
+explore: bad_ndt {
+  cancel_grouping_fields: [bad_ndt.workingat7am]
 }
 
 # adding breaking comment
