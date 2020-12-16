@@ -1,5 +1,6 @@
 connection: "@{connection_name}"
 
+include: "/test.dashboard.lookml"
 # include all the views
 include: "/base_views/*.view.lkml"
 
