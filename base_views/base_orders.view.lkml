@@ -32,7 +32,6 @@ view: base_orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
-    label: "blah blah"
   }
 
   dimension: user_id {
