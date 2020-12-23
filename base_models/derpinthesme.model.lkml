@@ -4,6 +4,8 @@ include: "/test2.dashboard.lookml"
 # include all the views
 include: "/base_views/*.view.lkml"
 
+include: "/test.view.lkml"
+
 ### adding bad commit
 
 ### BASE EXPLORES
