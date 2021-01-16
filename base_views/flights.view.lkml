@@ -1,4 +1,3 @@
-
 view: flights {
   extension: required
   sql_table_name: @{table_flights} ;;

@@ -46,7 +46,7 @@ explore: order_items {
 
   join: users {
     type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
+    sql_on: ${orders.user_id} = ${users.id}  ;;
     relationship: many_to_one
   }
 }
@@ -72,3 +72,5 @@ explore: orders {
   }
   always_join: [users]
 }
+
+### adding this. This should come back when we revert
