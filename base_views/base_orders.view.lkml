@@ -44,6 +44,18 @@ view: base_orders {
   }
 
 parameter: test {
-  type: date
+  type: string
+  allowed_value: {label:"a" value:"a"}
+  allowed_value: {label: "b" value:"b"}
+}
+
+dimension: testy {
+  type: string
+  sql:
+  {% if test._parameter_value == "'a'"%}
+  'success'
+  {% else %}
+  'get owned sucker'
+  {% endif %} ;;
 }
 }

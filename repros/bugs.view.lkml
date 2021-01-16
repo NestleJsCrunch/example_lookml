@@ -7,11 +7,11 @@ view: uibugs {
   ### ### ### ### ###### ### ### ### ###
   ### ### ### ### ###### ### ### ### ###
 
-  # 2021 {
+  ## 2021 ## {
 
   ### b1: field picker jumps around when searching {
   # created 30 fields, search for 'a'
-  # jira:
+  # jira: https://looker.atlassian.net/browse/EX-1123
   dimension: a1 {}
   dimension: a2 {}
   dimension: a3 {}
@@ -45,6 +45,23 @@ view: uibugs {
   ### end b1 }
 
 
-  # end 2021 }
+  ## end 2021 ## }
 
   }
+
+view: sqlbugs {
+
+
+  ### ### ### ### ###### ### ### ### ###
+  ### ### ### ### ###### ### ### ### ###
+  ### oh wonderful sqlbugs of looker ###
+  ### ### ### ### ###### ### ### ### ###
+  ### ### ### ### ###### ### ### ### ###
+
+  ## 2021 ## {
+
+
+  ## end 2021 ## }
+
+
+}

@@ -1,16 +1,12 @@
 include: "/base_views/[!explore_views]*.view.lkml"
 
-
-### adding comment 2
+### ### ### ### ###
+### test  views ###
+### ### ### ### ###
 
 view: orders {
   extends: [base_orders]
-
 }
-
-
-### adding thing
-
 view: users {
   extends: [base_users]
 }
