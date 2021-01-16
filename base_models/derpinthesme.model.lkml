@@ -72,5 +72,3 @@ explore: orders {
   }
   always_join: [users]
 }
-
-### adding this. This should come back when we revert
