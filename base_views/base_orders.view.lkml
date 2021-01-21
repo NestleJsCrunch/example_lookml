@@ -58,4 +58,9 @@ dimension: testy {
   'get owned sucker'
   {% endif %} ;;
 }
+
+measure: ag {
+  type: average
+  sql: ${id} ;;
+}
 }
