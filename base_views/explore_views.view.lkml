@@ -25,3 +25,6 @@ view: products {
 view: user_data {
   extends: [base_user_data]
 }
+
+
+### adding comment does another user on this branch see it ###
