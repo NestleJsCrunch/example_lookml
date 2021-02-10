@@ -32,6 +32,10 @@ view: base_orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+    link: {
+      label: "test"
+      url: "/dashboards/87"
+    }
   }
 
   dimension: user_id {
