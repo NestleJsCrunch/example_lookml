@@ -1,5 +1,7 @@
-view: inventory_items {
-  sql_table_name: demo_db.inventory_items ;;
+
+view: base_inventory_items {
+  extension: required
+  sql_table_name: @{table_iitems} ;;
 
   dimension: id {
     primary_key: yes

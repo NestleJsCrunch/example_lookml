@@ -1,5 +1,7 @@
-view: orders {
-  sql_table_name: demo_db.orders ;;
+
+view: base_events {
+  extension: required
+  sql_table_name: @{table_events} ;;
 
   dimension: id {
     primary_key: yes
@@ -21,13 +23,9 @@ view: orders {
     sql: ${TABLE}.created_at ;;
   }
 
-  dimension: status {
-    type: string
-    sql: ${TABLE}.status ;;
-    link: {
-      label: "testing dash"
-      url: "/dashboards/87"
-    }
+  dimension: type_id {
+    type: number
+    sql: ${TABLE}.type_id ;;
   }
 
   dimension: user_id {
@@ -36,8 +34,13 @@ view: orders {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: value {
+    type: string
+    sql: ${TABLE}.value ;;
+  }
+
   measure: count {
     type: count
-    drill_fields: [id, users.first_name, users.last_name, users.id, order_items.count]
+    drill_fields: [id, users.first_name, users.last_name, users.id]
   }
 }

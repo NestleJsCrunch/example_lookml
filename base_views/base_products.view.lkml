@@ -1,5 +1,7 @@
-view: products {
-  sql_table_name: demo_db.products ;;
+
+view: base_products {
+  extension: required
+  sql_table_name: @{table_products} ;;
 
   dimension: id {
     primary_key: yes

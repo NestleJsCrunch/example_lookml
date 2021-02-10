@@ -1,5 +1,7 @@
-view: user_data {
-  sql_table_name: demo_db.user_data ;;
+
+view: base_user_data {
+  extension: required
+  sql_table_name: @{table_udata};;
 
   dimension: id {
     primary_key: yes

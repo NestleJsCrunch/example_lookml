@@ -1,15 +1,14 @@
-connection: "thelook"
+connection: "@{connection_name}"
 
+include: "/test2.dashboard.lookml"
 # include all the views
-include: "*.view"
+include: "/base_views/*.view.lkml"
 
-datagroup: derpinthesme_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
-}
+include: "/test.view.lkml"
 
-persist_with: derpinthesme_default_datagroup
+### adding bad commit
 
+### BASE EXPLORES
 explore: events {
   join: users {
     type: left_outer
@@ -47,22 +46,12 @@ explore: order_items {
 
   join: users {
     type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
-
-explore: orders {
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
+    sql_on: ${orders.user_id} = ${users.id}  ;;
     relationship: many_to_one
   }
 }
 
 explore: products {}
-
-explore: schema_migrations {}
 
 explore: user_data {
   join: users {
@@ -74,4 +63,12 @@ explore: user_data {
 
 explore: users {}
 
-explore: users_nn {}
+# primary test explore
+explore: orders {
+  join: users {
+    type: left_outer
+    sql_on: ${orders.user_id} = ${users.id} ;;
+    relationship: many_to_one
+  }
+  always_join: [users]
+}

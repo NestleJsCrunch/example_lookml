@@ -1,5 +1,7 @@
-view: order_items {
-  sql_table_name: demo_db.order_items ;;
+
+view: base_order_items {
+  extension: required
+  sql_table_name: @{table_oitems} ;;
 
   dimension: id {
     primary_key: yes

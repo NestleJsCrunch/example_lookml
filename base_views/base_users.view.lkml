@@ -1,5 +1,7 @@
-view: users {
-  sql_table_name: demo_db.users ;;
+
+view: base_users {
+  extension: required
+  sql_table_name: @{table_users} ;;
 
   dimension: id {
     primary_key: yes
@@ -9,8 +11,9 @@ view: users {
 
   dimension: age {
     type: number
-    sql: ${TABLE}.age ;;
+    sql: ${TABLE}.age;;
   }
+
 
   dimension: city {
     type: string
@@ -69,18 +72,8 @@ view: users {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
+    drill_fields: [zip]
   }
 
-  # ----- Sets of fields for drilling ------
-  set: detail {
-    fields: [
-      id,
-      first_name,
-      last_name,
-      events.count,
-      orders.count,
-      user_data.count
-    ]
-  }
+
 }
