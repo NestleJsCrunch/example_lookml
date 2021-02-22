@@ -117,4 +117,11 @@ constant: required {
   export: "override_required"
 }
 
+constant: paramval1 {
+  value: "this_is_val1"
+}
+
+constant: paramval2 {
+  value: "this_is_val2"
+}
 ### ----- Custom JS ----- ###
