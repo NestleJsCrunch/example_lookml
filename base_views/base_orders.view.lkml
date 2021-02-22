@@ -33,8 +33,7 @@ view: base_orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
-    # order_by_field: sort
-  }
+}
 
   dimension: user_id {
     type: string
