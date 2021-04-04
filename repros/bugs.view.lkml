@@ -65,3 +65,34 @@ view: sqlbugs {
 
 
 }
+
+view: jank {
+  derived_table: {
+    sql:
+    select  ROW_NUMBER() OVER() row_number, start_station_id, start_station_name
+    from `potent-arcade-167816.SF_BS.bikeshare_trips_copy`
+    WHERE (start_station_name ) = 'Japantown' OR (start_station_name ) = 'Mezes'
+    ORDER BY 2 {% parameter jank %};;
+  }
+
+  parameter: jank {
+    type: unquoted
+    allowed_value: {label:"a" value:"DESC"}
+    allowed_value: {label:"b" value:"ASC"}
+  }
+
+  dimension: row_number {}
+
+  dimension: start_station_id {
+    type: number
+    sql: ${TABLE}.start_station_id ;;
+  }
+
+  dimension: start_station_name {
+    type: string
+    sql: ${TABLE}.start_station_name ;;
+    order_by_field: row_number
+  }
+}
+
+explore: jank {}

@@ -1,10 +1,7 @@
 connection: "@{connection_name}"
 
-include: "/test2.dashboard.lookml"
 # include all the views
 include: "/base_views/*.view.lkml"
-
-include: "/test.view.lkml"
 
 ### adding bad commit
 
@@ -70,6 +67,8 @@ explore: orders {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
+    # view_label: ""
   }
+  # always_filter: {filters:[orders.foo: "'bu_far'"]}
   always_join: [users]
 }

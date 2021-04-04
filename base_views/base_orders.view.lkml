@@ -33,6 +33,10 @@ view: base_orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
+    link: {
+      label: "foo"
+      url: "/explore/derpinthesme/orders?blahblah"
+    }
 }
 
   dimension: user_id {
@@ -40,101 +44,39 @@ view: base_orders {
     sql: ${TABLE}.user_id ;;
   }
 
-  measure: count {
-    type: count
-    # html:
-    # <a href="https://www.thesitewizard.com/" target="_blank"> </a>
-    # ;;
-
-    }
-
-
-parameter: test {
+parameter: arbitrary {
   type: string
   allowed_value: {label:"a" value:"a"}
-  allowed_value: {label: "b" value:"b"}
+  allowed_value: {label:"b" value:"b"}
+
 }
+  measure: count {
+    type: count
+    }
 
-dimension: testy {
-  type: string
-  sql:
-  {% if test._parameter_value == "'a'"%}
-  'success'
-  {% else %}
-  'get owned sucker'
-  {% endif %} ;;
-}
+### scratchpad ###
 
-dimension: foo {
-  type: string
-  sql:
-  case
-  when ${created_date} = DATE_ADD(now(), -1)
-  then CAST(${created_date} as CHAR)
-  else CONCAT(CAST(DATE_ADD(NOW(), -30) as CHAR), ' to ', CAST(DATE_ADD(NOW(), -2) as CHAR))
-  end
-  ;;
-}
-
-measure: ag {
-  type: average
-  sql: ${id} ;;
-}
-
-dimension: sort {
-  type: number
-  sql:
-  case when
-
-  ${status} = 'complete' then 1
-  when ${status} = 'pending' then 2
-  when ${status} = 'cancelled' then 3
-  end;;
-}
-
-parameter: param {
+parameter: foo {
   type: string
   allowed_value: {
-    label: "v1"
-    value: "@{paramval1}"
+    label: "FU Bar"
+    value: "fubar"
   }
   allowed_value: {
-    label: "v2"
-    value: "@{paramval2}"
+    label: "Bu Far"
+    value: "bu_far"
   }
 }
 
-dimension: paramfam {
+dimension: doesitwork {
   type: string
-  sql:  {% parameter param %} ;;
+  sql: {% parameter foo %} ;;
 }
 
-  parameter: product_code_test {
-    type: string
-    allowed_value: {
-      label: "option 1"
-      value: "option 1"
-    }
-    allowed_value: {
-      label: "option 2"
-      value: "option 2"
-    }
-    allowed_value: {
-      label: "all"
-      value: "option 1, option2"
-    }
-  }
+measure: badmaybe {
+  type: date_time
+  sql: max(${created_time}) ;;
+  html: {{rendered_value | date: "%D %r"}} ;;
 
-  dimension: thing {
-    type: string
-    sql:
-    {% if orders.product_code_test._parameter_value == "'option 1'" %}
-    'success'
-    {% else %}
-    'bad'
-    {% endif %}
-
-    ;;
-  }
-
+}
 }
