@@ -72,3 +72,11 @@ explore: orders {
   # always_filter: {filters:[orders.foo: "'bu_far'"]}
   always_join: [users]
 }
+
+explore: hacky {
+  from: orders
+  join: this_is_bad {
+    from: orders
+    sql: (select  ;;
+  }
+}
