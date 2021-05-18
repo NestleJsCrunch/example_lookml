@@ -1,5 +1,7 @@
 project_name: "derpinthesme"
 
+aragonite: yes
+
 constant: project_name {
   value: "staging"
 }

@@ -25,25 +25,3 @@ view: products {
 view: user_data {
   extends: [base_user_data]
 }
-
-view: test {
-  derived_table: {
-    sql:
-    select 'a' as a, 5 as foo, 0 as bar
-    union all
-    select 'b' as a, 10 as foo, 8 as bar
-;;
-  }
-
-  dimension: a {}
-  measure: foo {
-    type: sum
-    sql: ${TABLE}.foo ;;
-  }
-  measure: bar {
-    type: sum
-    sql: ${TABLE}.bar ;;
-  }
-}
-
-explore: test {}
