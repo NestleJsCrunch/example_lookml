@@ -30,6 +30,12 @@ view: base_orders {
     sql: ${TABLE}.created_at ;;
     }
 
+dimension_group: dur {
+  type: duration
+  sql_start: ${users.created_date} ;;
+  sql_end: ${orders.created_date} ;;
+
+}
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
@@ -77,6 +83,11 @@ measure: badmaybe {
   type: date_time
   sql: max(${created_time}) ;;
   html: {{rendered_value | date: "%D %r"}} ;;
-
 }
+
+measure: seperator {
+  type: number
+  sql: ${count}*null ;;
+}
+
 }

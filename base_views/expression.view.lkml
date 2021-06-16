@@ -47,5 +47,14 @@ view: expression {
   }
 
 
+  ### date functions
+  #
+  dimension: add_days {
+    type: date
+    expression: add_days(1,${created_date});;
+  }
+
 
 }
+
+explore: expression {}

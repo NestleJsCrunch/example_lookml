@@ -16,6 +16,10 @@ constant: alternate_connection {
   value: "philip_martinelli"
 }
 
+constant: james_bigquery_oncall {
+  value: "james_bigquery_oncallnotifs"
+}
+
 ### --- table names --- ###
 
 # bigquery
