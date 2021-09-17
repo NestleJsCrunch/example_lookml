@@ -1,6 +1,4 @@
-project_name: "derpinthesme"
-
-aragonite: yes
+project_name: "tsr_example_base"
 
 constant: project_name {
   value: "staging"
@@ -12,25 +10,7 @@ constant: connection_name {
   value: "thelook"
 }
 
-constant: alternate_connection {
-  value: "philip_martinelli"
-}
-
-constant: james_bigquery_oncall {
-  value: "james_bigquery_oncallnotifs"
-}
-
 ### --- table names --- ###
-
-# bigquery
-
-constant: table_phillip {
-  value: "`potent-arcade-167816.performance_benchmarking.model_complexity`"
-}
-
-constant: table_phillip_bike {
-  value: "`potent-arcade-167816.SF_BS.bikeshare_stations_copy`"
-}
 
 # mysql
 constant: table_orders {
@@ -74,60 +54,3 @@ constant: bq_updt_begin{
 constant: mysql_updt_begin {
   value: "select ROW_NUMBER() OVER (PARTITION BY 1 ORDER BY 1) as true_pk, *"
 }
-
-### ----- test constants ------ ###
-
-
-constant: font {
-  value: "<font size=3px>{{ value }}</font>"
-}
-
-constant: formatstuff {
-  value: "
-  {% if value > 1000000000 %}
-            ${{value | divided_by: 1000000000 | round:2 }}B
-          {% elsif value >= 1000000 and value < 1000000000 %}
-            ${{value | divided_by: 1000000 | round:2 }}M
-          {% elsif value >= 1000 and value < 1000000 %}
-            ${{value | divided_by: 1000 | round:2 }}K
-          {% elsif value >= 0 and value < 1000 %}
-            ${{value | round:2 }}
-          {% elsif value > -1000 and value < 0 %}
-               ${{value | round:2 }}
-          {% elsif value > -1000000 and value <= -1000 %}
-               ${{value | divided_by: 1000 | round:2 }}k
-          {% elsif value > -1000000000 and value <= -1000000 %}
-               ${{value | divided_by: 1000000 | round:2 }}M
-          {% elsif value <= -1000000000 %}
-               ${{value | divided_by: 1000000000 | round:2 }}B
-          {% else %}
-            'fail'
-          {% endif %}
-
-  "
-}
-
-
-constant: none {
-  value: "none"
-  export: none
-}
-
-constant: optional {
-  value: "optional"
-  export: override_optional
-}
-
-constant: required {
-  value: "required"
-  export: "override_required"
-}
-
-constant: paramval1 {
-  value: "this_is_val1"
-}
-
-constant: paramval2 {
-  value: "this_is_val2"
-}
-### ----- Custom JS ----- ###

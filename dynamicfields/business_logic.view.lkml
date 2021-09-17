@@ -7,6 +7,8 @@ set: dynamic_fields {
 
 
 # let's start with some simple metrics
+# these are going to be what the end user gets to select from
+#
 
 measure: sum_sales {
   type: sum
@@ -160,7 +162,7 @@ CONCAT(
       end
 
       {% else %}
-      ' '
+      'No field selected'
       {% endif %}
         AS CHAR),
 
@@ -178,7 +180,7 @@ CONCAT(
       end
 
     {% else %}
-    ' '
+    'No field selected'
 
     {% endif %}
         AS CHAR)
@@ -201,7 +203,7 @@ CONCAT(
     then ${dcount_users}
     end
     {% else %}
-    'Please select a metric to populate this field'
+    'No field selected'
     {% endif %}
     ;;
 

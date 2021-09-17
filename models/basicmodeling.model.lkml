@@ -3,9 +3,6 @@ connection: "@{connection_name}"
 # include all the views
 include: "/base_views/*.view.lkml"
 
-
-### adding bad commit
-
 ### BASE EXPLORES
 explore: events {
   join: users {
@@ -68,17 +65,7 @@ explore: orders {
     type: left_outer
     sql_on: ${orders.user_id} = ${users.id} ;;
     relationship: many_to_one
-    # view_label: ""
   }
-  # always_filter: {filters:[orders.foo: "'bu_far'"]}
   always_join: [users]
 
-}
-
-explore: hacky {
-  from: orders
-  join: this_is_bad {
-    from: orders
-    sql: (select  ;;
-  }
 }

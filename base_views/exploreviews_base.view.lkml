@@ -1,4 +1,4 @@
-include: "/base_views/[!explore_views]*.view.lkml"
+include: "/base_views/[!exploreviews_base]*.view.lkml"
 
 ### ### ### ### ###
 ### test  views ###

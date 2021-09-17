@@ -1,20 +1,7 @@
 view: sc_users {
 
-  # adding pk and etc
   sql_table_name: @{table_users}
 ;;
-
-# -- (
-# -- @{uuid_begin} from @{table_users}
-# -- )
-
-  # pk defined and hidden
-  # dimension: true_pk {
-  #   type: string
-  #   hidden: yes
-  #   primary_key: yes
-  #   sql: ${TABLE}.true_pk ;;
-  # }
 
   # base dims
   dimension: id {
